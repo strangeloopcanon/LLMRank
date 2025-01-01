@@ -1,7 +1,7 @@
 
 # LLMRank
 
-**LLMRank**, also affectionately called SlopRank, is an eval framework for ranking LLMs using peer-based cross-evaluation and PageRank. It enables unbiased, dynamic, and scalable benchmarking of multiple models, fostering transparency and innovation in the development of AI systems.
+Affectionately called SlopRank, this is an eval framework for ranking LLMs using peer-based cross-evaluation and PageRank. It enables unbiased, dynamic, and scalable benchmarking of multiple models, fostering transparency and innovation in the development of AI systems.
 
 You can use it for one large set of heterogenous prompts to get the overall ranking, or smaller sets to get rankings for your particular usecase.
 
@@ -13,7 +13,7 @@ Example output from one set:
    o1-preview: 0.2474
    claude-3-5-sonnet-latest: 0.2455
    ```
-
+---
 ## Features
 - **Peer-Based Evaluation**: Models evaluate each other's responses, mimicking a collaborative and competitive environment.
 - **Customizable Scoring**:
@@ -103,4 +103,4 @@ Contributions are welcome! If you have ideas for improving the framework, feel f
 ## Acknowledgments
 Special thanks to:
 - [SimonW](https://github.com/simonw) for the `llm` library.
-- The AI community for driving innovation in LLMs.
+- The AI community
