@@ -1,7 +1,7 @@
 
-# LLMRank: LLM Ranking Framework
+# LLMRank:
 
-**LLMRank** is an eval framework for ranking LLMs using peer-based cross-evaluation and PageRank. It enables unbiased, dynamic, and scalable benchmarking of multiple models, fostering transparency and innovation in the development of AI systems.
+**LLMRank**, also affectionately called SlopRank, is an eval framework for ranking LLMs using peer-based cross-evaluation and PageRank. It enables unbiased, dynamic, and scalable benchmarking of multiple models, fostering transparency and innovation in the development of AI systems.
 
 You can use it for one large set of heterogenous prompts to get the overall ranking, or smaller sets to get rankings for your particular usecase.
 
