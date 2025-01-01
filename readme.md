@@ -45,14 +45,8 @@ Example output
 - `dotenv` for environment variable management
 
 ### Setup
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/PeerRankEval.git
-   cd PeerRankEval
-   ```
-
-2. Install dependencies:
-
+1. Clone the repository
+2. Install dependencies
 3. Set up API keys for your LLMs by creating a `.env` file:
    ```bash
    OPENAI_API_KEY=your_openai_key
