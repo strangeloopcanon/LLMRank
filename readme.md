@@ -5,7 +5,7 @@
 
 You can use it for one large set of heterogenous prompts to get the overall ranking, or smaller sets to get rankings for your particular usecase.
 
-Example output
+Example output from one set:
    ```bash
    === PageRank Scores ===
    gemini-2.0-flash-thinking-exp-1219: 0.2563
