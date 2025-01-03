@@ -155,3 +155,4 @@ cython_debug/
 \#Archive/*
 __pycache__
 prompts.csv
+*.csv
