@@ -154,4 +154,4 @@ cython_debug/
 \# older_scripts
 \#Archive/*
 __pycache__
-llms/__pycache__
+prompts.csv
