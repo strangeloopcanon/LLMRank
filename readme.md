@@ -7,14 +7,14 @@ You can use it for one large set of heterogenous prompts to get the overall rank
 
 Definitive ranking:
    ```bash
-   === PageRank Scores ===
-   gemini-2.0-flash-thinking-exp-1219: 0.1466
-   o1-preview: 0.1456
-   gemini-exp-1206: 0.1455
-   deepseek-chat: 0.1424
-   gpt-4o: 0.1422
-   claude-3-5-sonnet-latest: 0.1398
-   claude-3-opus-latest: 0.1380
+   === Model Rankings ===
+   o1-preview                     0.1592 (normalized: 10.00)
+   deepseek-chat                  0.1489 (normalized: 9.35)
+   gemini-exp-1206                0.1447 (normalized: 9.09)
+   gemini-2.0-flash-thinking-exp-1219 0.1397 (normalized: 8.77)
+   claude-3-opus-latest           0.1375 (normalized: 8.64)
+   gpt-4o                         0.1373 (normalized: 8.62)
+   claude-3-5-sonnet-latest       0.1326 (normalized: 8.33)
    ```
 ---
 ## Features
