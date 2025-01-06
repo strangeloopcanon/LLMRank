@@ -1,38 +1,38 @@
 {
     "rankings": [
         [
+            "gemini-2.0-flash-thinking-exp-1219",
+            0.21109588370840998
+        ],
+        [
             "o1-preview",
-            0.16288261801207857
+            0.16548068769867422
         ],
         [
             "claude-3-5-sonnet-latest",
-            0.15983191860640236
+            0.14958489124670707
         ],
         [
             "gpt-4o",
-            0.14713606031018547
+            0.13627925189797072
         ],
         [
             "deepseek-chat",
-            0.14251360136107644
-        ],
-        [
-            "gemini-exp-1206",
-            0.134831649368899
+            0.1323506872180355
         ],
         [
             "claude-3-opus-latest",
-            0.1266540000119289
+            0.10625577698822791
         ],
         [
-            "gemini-2.0-flash-thinking-exp-1219",
-            0.1261501523294294
+            "gemini-exp-1206",
+            0.09895282124197442
         ]
     ],
     "metadata": {
         "evaluation_method": 1,
         "use_subset_evaluation": true,
         "evaluators_subset_size": 3,
-        "timestamp": "2025-01-05 21:10:52"
+        "timestamp": "2025-01-06T11:32:26.386811"
     }
 }
