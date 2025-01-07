@@ -7,7 +7,7 @@ You can use it for one large set of heterogenous prompts to get the overall rank
 
 Definitive ranking:
    ```bash
-   === Model Rankings ===
+   === PageRank Rankings ===
    o1-preview                     0.1592 (normalized: 10.00)
    deepseek-chat                  0.1489 (normalized: 9.35)
    gemini-exp-1206                0.1447 (normalized: 9.09)
