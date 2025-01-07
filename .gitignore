@@ -153,6 +153,5 @@ cython_debug/
 .DS_Store
 \# older_scripts
 \#Archive/*
-__pycache__
-prompts.csv
 *.csv
+*.xlsx
