@@ -153,5 +153,3 @@ cython_debug/
 .DS_Store
 \# older_scripts
 \#Archive/*
-*.csv
-*.xlsx

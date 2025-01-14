@@ -8,13 +8,13 @@ You can use it for one large set of heterogenous prompts to get the overall rank
 Definitive ranking:
    ```bash
    === PageRank Rankings ===
-   o1-preview                     0.1592 (normalized: 10.00)
-   deepseek-chat                  0.1489 (normalized: 9.35)
-   gemini-exp-1206                0.1447 (normalized: 9.09)
-   gemini-2.0-flash-thinking-exp-1219 0.1397 (normalized: 8.77)
-   claude-3-opus-latest           0.1375 (normalized: 8.64)
-   gpt-4o                         0.1373 (normalized: 8.62)
-   claude-3-5-sonnet-latest       0.1326 (normalized: 8.33)
+	model	pagerank_score
+0	o1-preview	0.179620
+1	gpt-4o	0.177921
+2	deepseek-chat	0.164862
+3	gemini-2.0-flash-thinking-exp-1219	0.164780
+4	claude-3-5-sonnet-latest	0.157729
+5	gemini-exp-1206	0.155089
    ```
 ---
 ## Features
