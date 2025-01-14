@@ -9,12 +9,12 @@ Definitive ranking:
    ```bash
    === PageRank Rankings ===
 	model	pagerank_score
-0	o1-preview	0.179620
-1	gpt-4o	0.177921
-2	deepseek-chat	0.164862
-3	gemini-2.0-flash-thinking-exp-1219	0.164780
-4	claude-3-5-sonnet-latest	0.157729
-5	gemini-exp-1206	0.155089
+0	o1-preview	0.179404
+1	gpt-4o	0.178305
+2	deepseek-chat	0.167105
+3	gemini-2.0-flash-thinking-exp-1219	0.164732
+4	claude-3-5-sonnet-latest	0.155571
+5	gemini-exp-1206	0.154884
    ```
 ---
 ## Features
