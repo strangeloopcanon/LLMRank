@@ -2,6 +2,9 @@
 requires = ["setuptools>=42", "wheel", "build", "twine"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools]
+license-files = []  # override the default behavior
+
 [project]
 name = "sloprank"
 version = "0.1.0"
