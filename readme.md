@@ -79,6 +79,11 @@ Or, if you want to just use the jupyter notebook, you can use:
 
 ## Usage
 
+After installing, you can run the entire SlopRank workflow via the `sloprank` command. For example:
+
+```bash
+sloprank --prompts prompts.xlsx --output-dir results
+```
 ### Configuration
 - **Models**: Update the `MODEL_NAMES` list in the notebook to include the models you want to evaluate.
 - **Prompts**: Define your prompts in the `raw_prompts` list.
