@@ -48,6 +48,24 @@ Definitive ranking:
 - `dotenv` for environment variable management
 
 ### Setup
+
+SlopRank is on PyPI, so you can install it via:
+```bash
+pip install sloprank
+   ```
+From Source: If you prefer, clone this repo and install locally:
+```bash
+git clone https://github.com/yourusername/sloprank.git
+cd sloprank
+pip install .
+   ```
+
+Usage: After installation, you can run the CLI:
+
+```bash
+sloprank --help
+   ```
+Or, if you want to just use the jupyter notebook, you can use:
 1. Clone the repository
 2. Install dependencies
 3. Set up API keys for your LLMs by creating a `.env` file:
