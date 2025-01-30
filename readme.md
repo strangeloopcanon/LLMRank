@@ -81,8 +81,7 @@ Or, if you want to just use the jupyter notebook, you can use:
 
 After installing, you can run the entire SlopRank workflow via the `sloprank` command. By default, SlopRank uses the models defined in DEFAULT_CONFIG. You can override this by passing --models with a comma-separated list.
 
-For example:
-
+For example, in the same directory as prompts.xlsx, run:
 ```bash
 sloprank --prompts prompts.xlsx --output-dir results
 ```
