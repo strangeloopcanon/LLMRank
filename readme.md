@@ -86,6 +86,15 @@ For example:
 ```bash
 sloprank --prompts prompts.xlsx --output-dir results
 ```
+--prompts prompts.xlsx tells SlopRank where to find your list of prompts.
+--output-dir results puts all CSV and JSON outputs in the results/ folder.
+If you want to override the default models:
+
+```bash
+sloprank --prompts prompts.xlsx --output-dir results \
+         --models "gpt-4o,claude-3-5-sonnet-latest,o1-preview"
+```
+
 ### Configuration
 - **Models**: Update the `MODEL_NAMES` list in the notebook to include the models you want to evaluate.
 - **Prompts**: Define your prompts in the `raw_prompts` list.
