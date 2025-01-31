@@ -55,7 +55,7 @@ pip install sloprank
    ```
 From Source: If you prefer, clone this repo and install locally:
 ```bash
-git clone https://github.com/marquisdepolis/llmrank.git
+git clone https://github.com/strangeloopcanon/llmrank.git
 cd sloprank
 pip install .
    ```
