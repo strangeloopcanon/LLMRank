@@ -28,3 +28,6 @@ dependencies = [
 where = ["."]
 include = ["sloprank*"]
 exclude = ["results", "results.*"]
+
+[project.scripts]
+sloprank = "sloprank.cli:main"
