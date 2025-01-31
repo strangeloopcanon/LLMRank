@@ -55,7 +55,7 @@ pip install sloprank
    ```
 From Source: If you prefer, clone this repo and install locally:
 ```bash
-git clone https://github.com/yourusername/sloprank.git
+git clone https://github.com/marquisdepolis/llmrank.git
 cd sloprank
 pip install .
    ```
@@ -140,3 +140,4 @@ Contributions are welcome! If you have ideas for improving the framework, feel f
 Special thanks to:
 - [SimonW](https://github.com/simonw) for the `llm` library.
 - The AI community
+
