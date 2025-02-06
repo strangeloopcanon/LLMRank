@@ -7,8 +7,8 @@ license-files = []  # override the default behavior
 
 [project]
 name = "sloprank"
-version = "0.1.1"
-description = "Peer-based cross-evaluation system"
+version = "0.1.2"
+description = "Peer-based LLM cross-evaluation system"
 authors = [
   { name = "Rohit Krishnan", email = "rohit.krishnan@gmail.com" }
 ]
@@ -23,6 +23,9 @@ dependencies = [
   "python-dotenv>=0.21.0",
   "click>=8.0.0"
 ]
+
+[project.urls]
+Homepage = "https://github.com/strangeloopcanon/LLMRank"
 
 [tool.setuptools.packages.find]
 where = ["."]
