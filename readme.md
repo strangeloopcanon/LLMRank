@@ -192,17 +192,15 @@ There are several ways to view the interactive dashboard:
    ```
 
 2. **Direct viewing on GitHub**:
-   You can view the HTML dashboard directly from GitHub using htmlpreview:
-   ```
-   https://htmlpreview.github.io/?https://github.com/yourusername/llmrank/blob/main/docs/index.html
-   ```
-   Just replace `yourusername` with your actual GitHub username.
+   You can view the HTML dashboard directly using this link:
+   
+   [View Interactive Dashboard](https://htmlpreview.github.io/?https://github.com/strangeloopcanon/llmrank/blob/main/docs/index.html)
 
 3. **Download and open**:
    You can download the dashboard file from:
-   ```
-   https://raw.githubusercontent.com/yourusername/llmrank/main/docs/index.html
-   ```
+   
+   [Download Dashboard HTML](https://raw.githubusercontent.com/strangeloopcanon/llmrank/main/docs/index.html)
+   
    And open it in any browser locally.
 
 ## Applications
@@ -231,53 +229,9 @@ To build and release a new version of SlopRank to PyPI:
 - If the build fails, ensure all dependencies are correctly listed in pyproject.toml
 - If the package fails validation, fix the issues before attempting to upload again
 
-## Changelog
+## Version History
 
-### [0.2.3] - 2025-02-28
-
-#### Added
-- Tests directory with simple test scripts and example prompts
-- Test README with documentation on how to run tests
-
-#### Fixed
-- Improved error handling for subset evaluation configuration
-- Automatic adjustment of evaluators_subset_size when too large for the number of models
-- Added support for new model versions (Claude-3.7-Sonnet, ChatGPT-4o, Deepseek-Reasoner)
-
-### [0.2.2] - 2025-01-14
-
-#### Added
-- Support for graph visualization of model endorsements
-- Confidence interval calculations for rankings
-- Category analysis for prompt-specific performance
-
-#### Changed
-- Improved API error handling
-- Enhanced CLI interface with additional options
-
-### [0.2.1] - 2025-01-03
-
-#### Added
-- Dashboard features for interactive exploration
-- Visualization improvements
-
-#### Fixed
-- Bug fixes in PageRank calculation
-- Better error handling for API timeouts
-
-### [0.2.0] - 2024-12-20
-
-#### Added
-- Complete rewrite with modular architecture
-- Support for multiple evaluation methods
-- Export options for results
-
-### [0.1.0] - 2024-12-01
-
-#### Added
-- Initial release
-- Basic implementation of peer-based LLM evaluation
-- PageRank algorithm for ranking models
+See the [CHANGELOG.md](CHANGELOG.md) file for a detailed version history and release notes.
 
 ## Ideas for Contributions
 
