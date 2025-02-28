@@ -1,4 +1,3 @@
-
 # LLMRank
 
 "SlopRank" is an eval framework for ranking LLMs using peer-based cross-evaluation and PageRank. It enables unbiased, dynamic, and scalable benchmarking of multiple models, fostering transparency and innovation in the development of AI systems.
@@ -56,28 +55,28 @@ Definitive ranking:
 SlopRank is on PyPI, so you can install it via:
 ```bash
 pip install sloprank
-   ```
+```
+
 From Source: If you prefer, clone this repo and install locally:
 ```bash
 git clone https://github.com/strangeloopcanon/llmrank.git
 cd sloprank
 pip install .
-   ```
+```
 
-Usage: After installation, you can run the CLI:
+### API Keys Setup
 
+Set up API keys using Simon Willison's llm tool:
 ```bash
-sloprank --help
-   ```
-Or, if you want to just use the jupyter notebook, you can use:
-1. Clone the repository
-2. Install dependencies
-3. Set up API keys for your LLMs by creating a `.env` file:
-   ```bash
-   OPENAI_API_KEY=your_openai_key
-   ANTHROPIC_API_KEY=your_anthropic_key
-   ```
-   I set them using llm keys set [MODEL] 
+llm keys set anthropic 
+llm keys set openai
+```
+
+Or create a `.env` file with:
+```
+OPENAI_API_KEY=your_openai_key
+ANTHROPIC_API_KEY=your_anthropic_key
+```
 
 ---
 
@@ -85,12 +84,14 @@ Or, if you want to just use the jupyter notebook, you can use:
 
 After installing, you can run the entire SlopRank workflow via the `sloprank` command. By default, SlopRank uses the models defined in DEFAULT_CONFIG. You can override this by passing --models with a comma-separated list.
 
-For example, in the same directory as prompts.xlsx, run:
+### Basic Usage
+
 ```bash
 sloprank --prompts prompts.xlsx --output-dir results
 ```
---prompts prompts.xlsx tells SlopRank where to find your list of prompts.
---output-dir results puts all CSV and JSON outputs in the results/ folder.
+- `--prompts prompts.xlsx` tells SlopRank where to find your list of prompts.
+- `--output-dir results` puts all CSV and JSON outputs in the results/ folder.
+
 If you want to override the default models:
 
 ```bash
@@ -104,15 +105,17 @@ sloprank --prompts prompts.xlsx --output-dir results \
 - **Evaluation Method**: Choose between numeric ratings (`EVALUATION_METHOD = 1`) or upvotes/downvotes (`EVALUATION_METHOD = 2`).
 - **Subset Evaluation**: Toggle `USE_SUBSET_EVALUATION` to reduce evaluation costs.
 
-### Running the Framework
+### Advanced Features
 
-#### Using the CLI
+#### Visualization, Confidence Intervals, and Categories
 
-Run the full SlopRank workflow with visualization, categories, and confidence intervals:
+Run SlopRank with all advanced features:
 
 ```bash
-sloprank run --prompts prompts.xlsx --output-dir results --visualize --confidence
+sloprank run --prompts prompts.xlsx --output-dir results --visualize --confidence --categories
 ```
+
+#### Interactive Dashboard
 
 Add the `--dashboard` flag to launch an interactive web dashboard:
 
@@ -126,13 +129,37 @@ Launch the dashboard for existing results:
 sloprank dashboard --output-dir results
 ```
 
-#### Using the Notebook
-1. Open and run the notebook.
-2. Inspect the results:
-   - Ranked models based on PageRank.
-   - Visualization of the endorsement graph.
-   - Confidence intervals and statistical significance.
-   - Category-specific rankings.
+#### Using Individual Tools
+
+The `examples/` directory contains standalone scripts for each advanced feature:
+
+1. Graph Visualization:
+   ```bash
+   python examples/generate_visualization.py
+   ```
+
+2. Confidence Intervals:
+   ```bash
+   python examples/compute_confidence.py
+   ```
+
+3. Prompt Categorization:
+   ```bash
+   python examples/prompt_categorization.py
+   ```
+
+4. Dashboard Generation:
+   ```bash
+   python examples/generate_dashboard.py
+   python examples/dashboard.py
+   ```
+
+### Using the Notebook
+
+If you prefer using Jupyter Notebook:
+1. Open `llmrank.ipynb`
+2. Run the cells to execute the workflow
+3. Inspect the results
 
 ---
 
@@ -145,6 +172,14 @@ sloprank dashboard --output-dir results
 - **Confidence Intervals**: Statistical confidence bounds for model rankings.
 - **Significance Tests**: Statistical significance indicators between adjacent ranks.
 - **Category Rankings**: Model performance across different prompt categories.
+
+### Example Dashboard
+
+The dashboard provides:
+- Overall model rankings with confidence intervals
+- Category-specific performance analysis
+- Interactive graph visualizations
+- Model comparison tools
 
 ---
 
@@ -159,11 +194,12 @@ sloprank dashboard --output-dir results
 ## Ideas for Contributions
 
 ### Suggested Improvements
-1. Add graph visualization to show endorsement flow between models.
-2. Create a heatmap of model scores across different prompts.
+1. Improve visualization options and customization.
+2. Add more statistical analysis methods.
 3. Develop a public leaderboard to showcase rankings.
-4. Build a simple GUI for easier usage of the framework.
+4. Enhance the web dashboard with more interactive features.
 5. Add support for multi-language evaluation by introducing localized prompts.
+6. Implement cost estimation and optimization features.
 
 Contributions are welcome! If you have ideas for improving the framework, feel free to open an issue or submit a pull request.
 
@@ -173,4 +209,3 @@ Contributions are welcome! If you have ideas for improving the framework, feel f
 Special thanks to:
 - [SimonW](https://github.com/simonw) for the `llm` library.
 - The AI community
-
