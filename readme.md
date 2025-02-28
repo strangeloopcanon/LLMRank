@@ -17,7 +17,7 @@ You can use it with a large set of heterogeneous prompts to get overall rankings
 ```
 
 Supported models include ChatGPT-4o, Claude-3.7-Sonnet, Deepseek-Reasoner, Gemini-2.0-Pro, O1, and others.
----
+
 ## Features
 - **Peer-Based Evaluation**: Models evaluate each other's responses, mimicking a collaborative and competitive environment.
 - **Customizable Scoring**:
@@ -31,8 +31,6 @@ Supported models include ChatGPT-4o, Claude-3.7-Sonnet, Deepseek-Reasoner, Gemin
 - **Statistical Confidence**: Calculate confidence intervals and significance tests for model rankings.
 - **Interactive Dashboard**: Explore results through a web-based dashboard with interactive visualizations.
 
----
-
 ## How It Works
 1. **Prompt Collection**: Define a set of questions or tasks to test the models.
 2. **Model Responses**: Each model generates a response to the prompts.
@@ -41,8 +39,6 @@ Supported models include ChatGPT-4o, Claude-3.7-Sonnet, Deepseek-Reasoner, Gemin
    - Evaluations are collected via predefined scoring methods.
 4. **Graph Construction**: Build a directed graph where nodes are models, and edges represent endorsements.
 5. **Ranking**: Apply the PageRank algorithm to rank models based on their relative endorsements.
-
----
 
 ## Installation
 
@@ -79,8 +75,6 @@ Or create a `.env` file with:
 OPENAI_API_KEY=your_openai_key
 ANTHROPIC_API_KEY=your_anthropic_key
 ```
-
----
 
 ## Usage
 
@@ -163,8 +157,6 @@ If you prefer using Jupyter Notebook:
 2. Run the cells to execute the workflow
 3. Inspect the results
 
----
-
 ## Outputs
 - **Ranked Models**: A list of models ordered by their PageRank scores.
 - **Graph Representation**: A directed graph showing the flow of endorsements.
@@ -183,15 +175,79 @@ The dashboard provides:
 - Interactive graph visualizations
 - Model comparison tools
 
----
-
 ## Applications
 - **Benchmarking**: Evaluate and rank new or existing LLMs.
 - **Specialization Analysis**: Test domain-specific capabilities (e.g., legal, medical).
 - **Model Optimization**: Identify strengths and weaknesses for targeted fine-tuning.
 - **Public Leaderboards**: Maintain transparency and foster healthy competition among models.
 
----
+## Development
+
+### Release Process
+
+To build and release a new version of SlopRank to PyPI:
+
+1. Update the version number in `pyproject.toml` following semantic versioning
+2. Update the Changelog section below with all changes
+3. Clean previous builds: `rm -rf build/ dist/ *.egg-info/`
+4. Build the package: `python -m build`
+5. Validate the package: `twine check dist/*`
+6. Upload to PyPI: `twine upload dist/*`
+7. Create a GitHub release with the changelog info
+
+### Troubleshooting Releases
+
+- If you get permission errors during upload, check your PyPI credentials
+- If the build fails, ensure all dependencies are correctly listed in pyproject.toml
+- If the package fails validation, fix the issues before attempting to upload again
+
+## Changelog
+
+### [0.2.3] - 2025-02-28
+
+#### Added
+- Tests directory with simple test scripts and example prompts
+- Test README with documentation on how to run tests
+
+#### Fixed
+- Improved error handling for subset evaluation configuration
+- Automatic adjustment of evaluators_subset_size when too large for the number of models
+- Added support for new model versions (Claude-3.7-Sonnet, ChatGPT-4o, Deepseek-Reasoner)
+
+### [0.2.2] - 2025-01-14
+
+#### Added
+- Support for graph visualization of model endorsements
+- Confidence interval calculations for rankings
+- Category analysis for prompt-specific performance
+
+#### Changed
+- Improved API error handling
+- Enhanced CLI interface with additional options
+
+### [0.2.1] - 2025-01-03
+
+#### Added
+- Dashboard features for interactive exploration
+- Visualization improvements
+
+#### Fixed
+- Bug fixes in PageRank calculation
+- Better error handling for API timeouts
+
+### [0.2.0] - 2024-12-20
+
+#### Added
+- Complete rewrite with modular architecture
+- Support for multiple evaluation methods
+- Export options for results
+
+### [0.1.0] - 2024-12-01
+
+#### Added
+- Initial release
+- Basic implementation of peer-based LLM evaluation
+- PageRank algorithm for ranking models
 
 ## Ideas for Contributions
 
@@ -204,8 +260,6 @@ The dashboard provides:
 6. Implement cost estimation and optimization features.
 
 Contributions are welcome! If you have ideas for improving the framework, feel free to open an issue or submit a pull request.
-
----
 
 ## Acknowledgments
 Special thanks to:
