@@ -1,22 +1,22 @@
-# LLMRank
+# SlopRank
 
-"SlopRank" is an eval framework for ranking LLMs using peer-based cross-evaluation and PageRank. It enables unbiased, dynamic, and scalable benchmarking of multiple models, fostering transparency and innovation in the development of AI systems.
+SlopRank is an evaluation framework for ranking LLMs using peer-based cross-evaluation and PageRank. It enables unbiased, dynamic, and scalable benchmarking of multiple models, fostering transparency and innovation in the development of AI systems.
 
-You can use it for one large set of heterogenous prompts to get the overall ranking, or smaller sets to get rankings for your particular usecase.
+You can use it with a large set of heterogeneous prompts to get overall rankings, or with smaller targeted sets to evaluate models for your specific use case.
 
-Definitive ranking:
-   ```bash
-   === PageRank Rankings ===
-	model	pagerank_score
-0	o1-preview	0.179404
-1	gpt-4o	0.178305
-2	deepseek-chat	0.167105
-3	gemini-2.0-flash-thinking-exp-1219	0.164732
-4	claude-3-5-sonnet-latest	0.155571
-5	gemini-exp-1206	0.154884
+### Example Ranking:
+```
+=== PageRank Rankings ===
+   model                                pagerank_score
+0  o1-preview                           0.179404
+1  gpt-4o                               0.178305
+2  deepseek-chat                        0.167105
+3  gemini-2.0-flash-thinking-exp-1219   0.164732
+4  claude-3-5-sonnet-latest             0.155571
+5  gemini-exp-1206                      0.154884
+```
 
 Supported models include ChatGPT-4o, Claude-3.7-Sonnet, Deepseek-Reasoner, Gemini-2.0-Pro, O1, and others.
-   ```
 ---
 ## Features
 - **Peer-Based Evaluation**: Models evaluate each other's responses, mimicking a collaborative and competitive environment.
