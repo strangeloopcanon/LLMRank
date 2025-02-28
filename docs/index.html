@@ -1,0 +1,714 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SlopRank Dashboard</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                background-color: #f5f5f5;
+            }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                background-color: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            h1, h2 {
+                color: #333;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+            }
+            th, td {
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+            tr:hover {
+                background-color: #f5f5f5;
+            }
+            .bar-container {
+                width: 300px;
+                background-color: #eee;
+                border-radius: 4px;
+            }
+            .bar {
+                height: 20px;
+                background-color: #4CAF50;
+                border-radius: 4px;
+            }
+            .error-bar {
+                position: relative;
+                height: 20px;
+                width: 10px;
+                background-color: rgba(0,0,0,0.1);
+            }
+            .image-container {
+                margin-top: 20px;
+                text-align: center;
+            }
+            img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 4px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>SlopRank Dashboard</h1>
+            
+            <h2>Model Rankings</h2>
+            <table>
+                <tr>
+                    <th>Rank</th>
+                    <th>Model</th>
+                    <th>Score</th>
+                    <th>Visualization</th>
+    
+                    <th>Confidence Interval</th>
+        
+                </tr>
+    
+                <tr>
+                    <td>1</td>
+                    <td>o1-preview</td>
+                    <td>0.179404</td>
+                    <td>
+                        <div class="bar-container">
+                            <div class="bar" style="width: 300px;"></div>
+                        </div>
+                    </td>
+                    
+                <td>
+                    <div class="bar-container">
+                        <div class="bar" style="width: 299px;"></div>
+                        <div class="error-bar" style="position: absolute; top: 0; left: 260px; width: 74px; height: 20px; background-color: rgba(0,0,0,0.2);"></div>
+                    </div>
+                    0.179064 [0.155861, 0.200286]
+                </td>
+            
+                </tr>
+        
+                <tr>
+                    <td>2</td>
+                    <td>gpt-4o</td>
+                    <td>0.178305</td>
+                    <td>
+                        <div class="bar-container">
+                            <div class="bar" style="width: 298px;"></div>
+                        </div>
+                    </td>
+                    
+                <td>
+                    <div class="bar-container">
+                        <div class="bar" style="width: 297px;"></div>
+                        <div class="error-bar" style="position: absolute; top: 0; left: 261px; width: 74px; height: 20px; background-color: rgba(0,0,0,0.2);"></div>
+                    </div>
+                    0.178198 [0.156553, 0.200585]
+                </td>
+            
+                </tr>
+        
+                <tr>
+                    <td>3</td>
+                    <td>deepseek-chat</td>
+                    <td>0.167105</td>
+                    <td>
+                        <div class="bar-container">
+                            <div class="bar" style="width: 279px;"></div>
+                        </div>
+                    </td>
+                    
+                <td>
+                    <div class="bar-container">
+                        <div class="bar" style="width: 279px;"></div>
+                        <div class="error-bar" style="position: absolute; top: 0; left: 242px; width: 78px; height: 20px; background-color: rgba(0,0,0,0.2);"></div>
+                    </div>
+                    0.166883 [0.144720, 0.191760]
+                </td>
+            
+                </tr>
+        
+                <tr>
+                    <td>4</td>
+                    <td>gemini-2.0-flash-thinking-exp-1219</td>
+                    <td>0.164732</td>
+                    <td>
+                        <div class="bar-container">
+                            <div class="bar" style="width: 275px;"></div>
+                        </div>
+                    </td>
+                    
+                <td>
+                    <div class="bar-container">
+                        <div class="bar" style="width: 275px;"></div>
+                        <div class="error-bar" style="position: absolute; top: 0; left: 237px; width: 76px; height: 20px; background-color: rgba(0,0,0,0.2);"></div>
+                    </div>
+                    0.165014 [0.142054, 0.187329]
+                </td>
+            
+                </tr>
+        
+                <tr>
+                    <td>5</td>
+                    <td>claude-3-5-sonnet-latest</td>
+                    <td>0.155571</td>
+                    <td>
+                        <div class="bar-container">
+                            <div class="bar" style="width: 260px;"></div>
+                        </div>
+                    </td>
+                    
+                <td>
+                    <div class="bar-container">
+                        <div class="bar" style="width: 260px;"></div>
+                        <div class="error-bar" style="position: absolute; top: 0; left: 223px; width: 72px; height: 20px; background-color: rgba(0,0,0,0.2);"></div>
+                    </div>
+                    0.155903 [0.133843, 0.177003]
+                </td>
+            
+                </tr>
+        
+                <tr>
+                    <td>6</td>
+                    <td>gemini-exp-1206</td>
+                    <td>0.154884</td>
+                    <td>
+                        <div class="bar-container">
+                            <div class="bar" style="width: 258px;"></div>
+                        </div>
+                    </td>
+                    
+                <td>
+                    <div class="bar-container">
+                        <div class="bar" style="width: 259px;"></div>
+                        <div class="error-bar" style="position: absolute; top: 0; left: 223px; width: 77px; height: 20px; background-color: rgba(0,0,0,0.2);"></div>
+                    </div>
+                    0.154936 [0.133611, 0.179618]
+                </td>
+            
+                </tr>
+        
+            </table>
+    
+            <h2>Statistical Significance</h2>
+            <table>
+                <tr>
+                    <th>Comparison</th>
+                    <th>Significance</th>
+                </tr>
+        
+                <tr>
+                    <td>o1-preview_vs_gpt-4o</td>
+                    <td>Not significant</td>
+                </tr>
+            
+                <tr>
+                    <td>gpt-4o_vs_deepseek-chat</td>
+                    <td>Not significant</td>
+                </tr>
+            
+                <tr>
+                    <td>deepseek-chat_vs_gemini-2.0-flash-thinking-exp-1219</td>
+                    <td>Not significant</td>
+                </tr>
+            
+                <tr>
+                    <td>gemini-2.0-flash-thinking-exp-1219_vs_claude-3-5-sonnet-latest</td>
+                    <td>Not significant</td>
+                </tr>
+            
+                <tr>
+                    <td>claude-3-5-sonnet-latest_vs_gemini-exp-1206</td>
+                    <td>Not significant</td>
+                </tr>
+            
+            </table>
+        
+            <h2>Rankings by Category</h2>
+        
+                <h3>Creativity</h3>
+                <table>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Model</th>
+                        <th>Score</th>
+                        <th>Visualization</th>
+                    </tr>
+            
+                    <tr>
+                        <td>1</td>
+                        <td>o1-preview</td>
+                        <td>8.8571</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 300px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>2</td>
+                        <td>gemini-exp-1206</td>
+                        <td>8.8333</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 299px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>3</td>
+                        <td>deepseek-chat</td>
+                        <td>8.5000</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 287px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>4</td>
+                        <td>gemini-2.0-flash-thinking-exp-1219</td>
+                        <td>8.0455</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 272px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>5</td>
+                        <td>gpt-4o</td>
+                        <td>7.9231</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 268px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>6</td>
+                        <td>claude-3-5-sonnet-latest</td>
+                        <td>6.8571</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 232px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                </table>
+            
+                <h3>Economic</h3>
+                <table>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Model</th>
+                        <th>Score</th>
+                        <th>Visualization</th>
+                    </tr>
+            
+                    <tr>
+                        <td>1</td>
+                        <td>gpt-4o</td>
+                        <td>8.3333</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 300px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>2</td>
+                        <td>deepseek-chat</td>
+                        <td>8.0000</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 288px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>3</td>
+                        <td>gemini-exp-1206</td>
+                        <td>8.0000</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 288px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>4</td>
+                        <td>claude-3-5-sonnet-latest</td>
+                        <td>7.8889</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 284px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>5</td>
+                        <td>gemini-2.0-flash-thinking-exp-1219</td>
+                        <td>7.7500</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 279px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>6</td>
+                        <td>o1-preview</td>
+                        <td>7.5000</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 270px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                </table>
+            
+                <h3>Knowledge</h3>
+                <table>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Model</th>
+                        <th>Score</th>
+                        <th>Visualization</th>
+                    </tr>
+            
+                    <tr>
+                        <td>1</td>
+                        <td>gemini-2.0-flash-thinking-exp-1219</td>
+                        <td>7.0000</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 300px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>2</td>
+                        <td>claude-3-5-sonnet-latest</td>
+                        <td>6.8571</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 293px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>3</td>
+                        <td>gemini-exp-1206</td>
+                        <td>6.5714</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 281px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>4</td>
+                        <td>gpt-4o</td>
+                        <td>6.1667</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 264px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>5</td>
+                        <td>o1-preview</td>
+                        <td>5.8333</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 250px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>6</td>
+                        <td>deepseek-chat</td>
+                        <td>4.3333</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 185px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                </table>
+            
+                <h3>Medical</h3>
+                <table>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Model</th>
+                        <th>Score</th>
+                        <th>Visualization</th>
+                    </tr>
+            
+                    <tr>
+                        <td>1</td>
+                        <td>gpt-4o</td>
+                        <td>8.5000</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 300px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>2</td>
+                        <td>deepseek-chat</td>
+                        <td>7.1667</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 252px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>3</td>
+                        <td>gemini-exp-1206</td>
+                        <td>6.7143</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 236px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>4</td>
+                        <td>o1-preview</td>
+                        <td>6.2000</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 218px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>5</td>
+                        <td>gemini-2.0-flash-thinking-exp-1219</td>
+                        <td>6.1429</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 216px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>6</td>
+                        <td>claude-3-5-sonnet-latest</td>
+                        <td>5.0000</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 176px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                </table>
+            
+                <h3>Reasoning</h3>
+                <table>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Model</th>
+                        <th>Score</th>
+                        <th>Visualization</th>
+                    </tr>
+            
+                    <tr>
+                        <td>1</td>
+                        <td>o1-preview</td>
+                        <td>8.8000</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 300px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>2</td>
+                        <td>deepseek-chat</td>
+                        <td>8.7667</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 298px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>3</td>
+                        <td>gemini-exp-1206</td>
+                        <td>8.6111</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 293px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>4</td>
+                        <td>gpt-4o</td>
+                        <td>8.2121</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 279px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>5</td>
+                        <td>gemini-2.0-flash-thinking-exp-1219</td>
+                        <td>8.2069</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 279px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>6</td>
+                        <td>claude-3-5-sonnet-latest</td>
+                        <td>6.9655</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 237px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                </table>
+            
+                <h3>Technical</h3>
+                <table>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Model</th>
+                        <th>Score</th>
+                        <th>Visualization</th>
+                    </tr>
+            
+                    <tr>
+                        <td>1</td>
+                        <td>gemini-exp-1206</td>
+                        <td>9.2500</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 300px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>2</td>
+                        <td>o1-preview</td>
+                        <td>8.6667</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 281px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>3</td>
+                        <td>deepseek-chat</td>
+                        <td>8.5000</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 275px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>4</td>
+                        <td>claude-3-5-sonnet-latest</td>
+                        <td>8.0000</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 259px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>5</td>
+                        <td>gemini-2.0-flash-thinking-exp-1219</td>
+                        <td>7.3333</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 237px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>6</td>
+                        <td>gpt-4o</td>
+                        <td>7.0000</td>
+                        <td>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 227px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                
+                </table>
+            
+            <h2>Endorsement Graph</h2>
+            <div class="image-container">
+                <img src="visualizations/endorsement_graph.png" alt="Endorsement Graph">
+            </div>
+        
+        </div>
+    </body>
+    </html>
+    

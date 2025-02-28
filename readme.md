@@ -167,13 +167,42 @@ If you prefer using Jupyter Notebook:
 - **Significance Tests**: Statistical significance indicators between adjacent ranks.
 - **Category Rankings**: Model performance across different prompt categories.
 
-### Example Dashboard
+### Interactive Dashboard
 
 The dashboard provides:
 - Overall model rankings with confidence intervals
 - Category-specific performance analysis
 - Interactive graph visualizations
 - Model comparison tools
+
+![Dashboard Preview](results/visualizations/endorsement_graph.png)
+
+#### Viewing the Dashboard
+
+There are several ways to view the interactive dashboard:
+
+1. **Generate locally**:
+   ```bash
+   sloprank run --prompts prompts.xlsx --output-dir results --dashboard
+   ```
+   
+   Or view an existing dashboard with:
+   ```bash
+   sloprank dashboard --output-dir results
+   ```
+
+2. **GitHub Pages**:
+   You can host the dashboard on GitHub Pages by:
+   - Creating a `docs` folder at the root of your repository
+   - Moving your dashboard.html file into the docs folder
+   - Enabling GitHub Pages in your repository settings (Settings > Pages)
+   - Select the 'docs' folder as the source
+   
+   This will make your dashboard available at `https://yourusername.github.io/llmrank/`
+
+3. **Direct HTML embedding**:
+   If you're viewing this README on GitHub, you can download the dashboard.html file
+   from the releases section and open it in any browser.
 
 ## Applications
 - **Benchmarking**: Evaluate and rank new or existing LLMs.
