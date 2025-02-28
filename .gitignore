@@ -157,3 +157,6 @@ cython_debug/
 
 # Ignore private PyPI config
 .pypirc
+
+# Ignore Claude's reference file
+CLAUDE.md
