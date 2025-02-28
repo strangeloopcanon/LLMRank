@@ -191,18 +191,19 @@ There are several ways to view the interactive dashboard:
    sloprank dashboard --output-dir results
    ```
 
-2. **GitHub Pages**:
-   You can host the dashboard on GitHub Pages by:
-   - Creating a `docs` folder at the root of your repository
-   - Moving your dashboard.html file into the docs folder
-   - Enabling GitHub Pages in your repository settings (Settings > Pages)
-   - Select the 'docs' folder as the source
-   
-   This will make your dashboard available at `https://yourusername.github.io/llmrank/`
+2. **Direct viewing on GitHub**:
+   You can view the HTML dashboard directly from GitHub using htmlpreview:
+   ```
+   https://htmlpreview.github.io/?https://github.com/yourusername/llmrank/blob/main/docs/index.html
+   ```
+   Just replace `yourusername` with your actual GitHub username.
 
-3. **Direct HTML embedding**:
-   If you're viewing this README on GitHub, you can download the dashboard.html file
-   from the releases section and open it in any browser.
+3. **Download and open**:
+   You can download the dashboard file from:
+   ```
+   https://raw.githubusercontent.com/yourusername/llmrank/main/docs/index.html
+   ```
+   And open it in any browser locally.
 
 ## Applications
 - **Benchmarking**: Evaluate and rank new or existing LLMs.
