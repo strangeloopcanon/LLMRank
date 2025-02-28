@@ -7,7 +7,7 @@ license-files = []  # override the default behavior
 
 [project]
 name = "sloprank"
-version = "0.2.0"
+version = "0.2.1"
 description = "Peer-based LLM cross-evaluation system"
 authors = [
   { name = "Rohit Krishnan", email = "rohit.krishnan@gmail.com" }

@@ -419,4 +419,11 @@ def dashboard(output_dir, port):
 
 def main():
     """Entry point for CLI."""
+    # Register utility commands if available
+    try:
+        from .utils.commands import register_utils_commands
+        register_utils_commands(cli)
+    except ImportError:
+        pass
+    
     cli()
