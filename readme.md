@@ -14,6 +14,8 @@ Definitive ranking:
 3	gemini-2.0-flash-thinking-exp-1219	0.164732
 4	claude-3-5-sonnet-latest	0.155571
 5	gemini-exp-1206	0.154884
+
+Supported models include ChatGPT-4o, Claude-3.7-Sonnet, Deepseek-Reasoner, Gemini-2.0-Pro, O1, and others.
    ```
 ---
 ## Features

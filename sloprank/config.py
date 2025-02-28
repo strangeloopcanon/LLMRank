@@ -62,8 +62,10 @@ class EvalConfig:
         self.output_dir.mkdir(parents=True, exist_ok=True)
         if self.evaluation_method not in {1, 2}:
             raise ValueError("evaluation_method must be 1 or 2")
-        if self.evaluators_subset_size >= len(self.model_names):
-            raise ValueError("evaluators_subset_size must be < number of models")
+        if self.use_subset_evaluation and self.evaluators_subset_size >= len(self.model_names):
+            # Automatically adjust the subset size if needed
+            self.evaluators_subset_size = len(self.model_names) - 1 if len(self.model_names) > 1 else 1
+            logger.warning(f"Adjusted evaluators_subset_size to {self.evaluators_subset_size}")
         
         # Create visualization directory if needed
         if self.visualization.enabled:
