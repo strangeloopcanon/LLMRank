@@ -1,0 +1,158 @@
+{
+  "Creativity": [
+    {
+      "model": "o1-preview",
+      "score": 8.857142857142858
+    },
+    {
+      "model": "gemini-exp-1206",
+      "score": 8.833333333333334
+    },
+    {
+      "model": "deepseek-chat",
+      "score": 8.5
+    },
+    {
+      "model": "gemini-2.0-flash-thinking-exp-1219",
+      "score": 8.045454545454545
+    },
+    {
+      "model": "gpt-4o",
+      "score": 7.923076923076923
+    },
+    {
+      "model": "claude-3-5-sonnet-latest",
+      "score": 6.857142857142857
+    }
+  ],
+  "Economic": [
+    {
+      "model": "gpt-4o",
+      "score": 8.333333333333334
+    },
+    {
+      "model": "deepseek-chat",
+      "score": 8.0
+    },
+    {
+      "model": "gemini-exp-1206",
+      "score": 8.0
+    },
+    {
+      "model": "claude-3-5-sonnet-latest",
+      "score": 7.888888888888889
+    },
+    {
+      "model": "gemini-2.0-flash-thinking-exp-1219",
+      "score": 7.75
+    },
+    {
+      "model": "o1-preview",
+      "score": 7.5
+    }
+  ],
+  "Knowledge": [
+    {
+      "model": "gemini-2.0-flash-thinking-exp-1219",
+      "score": 7.0
+    },
+    {
+      "model": "claude-3-5-sonnet-latest",
+      "score": 6.857142857142857
+    },
+    {
+      "model": "gemini-exp-1206",
+      "score": 6.571428571428571
+    },
+    {
+      "model": "gpt-4o",
+      "score": 6.166666666666667
+    },
+    {
+      "model": "o1-preview",
+      "score": 5.833333333333333
+    },
+    {
+      "model": "deepseek-chat",
+      "score": 4.333333333333333
+    }
+  ],
+  "Medical": [
+    {
+      "model": "gpt-4o",
+      "score": 8.5
+    },
+    {
+      "model": "deepseek-chat",
+      "score": 7.166666666666667
+    },
+    {
+      "model": "gemini-exp-1206",
+      "score": 6.714285714285714
+    },
+    {
+      "model": "o1-preview",
+      "score": 6.2
+    },
+    {
+      "model": "gemini-2.0-flash-thinking-exp-1219",
+      "score": 6.142857142857143
+    },
+    {
+      "model": "claude-3-5-sonnet-latest",
+      "score": 5.0
+    }
+  ],
+  "Reasoning": [
+    {
+      "model": "o1-preview",
+      "score": 8.8
+    },
+    {
+      "model": "deepseek-chat",
+      "score": 8.766666666666667
+    },
+    {
+      "model": "gemini-exp-1206",
+      "score": 8.61111111111111
+    },
+    {
+      "model": "gpt-4o",
+      "score": 8.212121212121213
+    },
+    {
+      "model": "gemini-2.0-flash-thinking-exp-1219",
+      "score": 8.206896551724139
+    },
+    {
+      "model": "claude-3-5-sonnet-latest",
+      "score": 6.9655172413793105
+    }
+  ],
+  "Technical": [
+    {
+      "model": "gemini-exp-1206",
+      "score": 9.25
+    },
+    {
+      "model": "o1-preview",
+      "score": 8.666666666666666
+    },
+    {
+      "model": "deepseek-chat",
+      "score": 8.5
+    },
+    {
+      "model": "claude-3-5-sonnet-latest",
+      "score": 8.0
+    },
+    {
+      "model": "gemini-2.0-flash-thinking-exp-1219",
+      "score": 7.333333333333333
+    },
+    {
+      "model": "gpt-4o",
+      "score": 7.0
+    }
+  ]
+}

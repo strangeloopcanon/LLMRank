@@ -1,0 +1,47 @@
+{
+  "confidence_intervals": {
+    "o1-preview": {
+      "mean": 0.17906422978195008,
+      "lower_bound": 0.15586134755557632,
+      "upper_bound": 0.20028596105851823,
+      "std_dev": 0.011390744131633145
+    },
+    "claude-3-5-sonnet-latest": {
+      "mean": 0.1559034710506988,
+      "lower_bound": 0.1338431787122791,
+      "upper_bound": 0.17700336456568294,
+      "std_dev": 0.011074319360773228
+    },
+    "deepseek-chat": {
+      "mean": 0.16688348762576946,
+      "lower_bound": 0.14471972554662413,
+      "upper_bound": 0.19175975218761088,
+      "std_dev": 0.012124035815348115
+    },
+    "gpt-4o": {
+      "mean": 0.17819819894678382,
+      "lower_bound": 0.15655283702964287,
+      "upper_bound": 0.2005852449712515,
+      "std_dev": 0.010975986032101367
+    },
+    "gemini-exp-1206": {
+      "mean": 0.1549362213590768,
+      "lower_bound": 0.1336108623981094,
+      "upper_bound": 0.17961769528814694,
+      "std_dev": 0.01173552363968152
+    },
+    "gemini-2.0-flash-thinking-exp-1219": {
+      "mean": 0.16501439123572084,
+      "lower_bound": 0.14205363291625536,
+      "upper_bound": 0.18732921920572762,
+      "std_dev": 0.011653527254343038
+    }
+  },
+  "significance": {
+    "o1-preview_vs_gpt-4o": false,
+    "gpt-4o_vs_deepseek-chat": false,
+    "deepseek-chat_vs_gemini-2.0-flash-thinking-exp-1219": false,
+    "gemini-2.0-flash-thinking-exp-1219_vs_claude-3-5-sonnet-latest": false,
+    "claude-3-5-sonnet-latest_vs_gemini-exp-1206": false
+  }
+}
