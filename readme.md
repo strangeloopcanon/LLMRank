@@ -25,6 +25,10 @@ Definitive ranking:
 - **Subset Evaluation**: Reduce API costs by limiting the models each evaluator reviews.
 - **Graph-Based Ranking**: Endorsements are represented in a graph, and PageRank is used to compute relative rankings.
 - **Scalable Benchmarking**: Add more models or prompts with ease, maintaining flexibility and efficiency.
+- **Graph Visualization**: Visualize model endorsements with interactive and static graph visualizations.
+- **Category-Based Analysis**: Evaluate model performance across different prompt categories (reasoning, coding, etc.).
+- **Statistical Confidence**: Calculate confidence intervals and significance tests for model rankings.
+- **Interactive Dashboard**: Explore results through a web-based dashboard with interactive visualizations.
 
 ---
 
@@ -101,10 +105,34 @@ sloprank --prompts prompts.xlsx --output-dir results \
 - **Subset Evaluation**: Toggle `USE_SUBSET_EVALUATION` to reduce evaluation costs.
 
 ### Running the Framework
+
+#### Using the CLI
+
+Run the full SlopRank workflow with visualization, categories, and confidence intervals:
+
+```bash
+sloprank run --prompts prompts.xlsx --output-dir results --visualize --confidence
+```
+
+Add the `--dashboard` flag to launch an interactive web dashboard:
+
+```bash
+sloprank run --prompts prompts.xlsx --output-dir results --dashboard
+```
+
+Launch the dashboard for existing results:
+
+```bash
+sloprank dashboard --output-dir results
+```
+
+#### Using the Notebook
 1. Open and run the notebook.
 2. Inspect the results:
    - Ranked models based on PageRank.
-   - Visualization of the endorsement graph (optional).
+   - Visualization of the endorsement graph.
+   - Confidence intervals and statistical significance.
+   - Category-specific rankings.
 
 ---
 
@@ -112,6 +140,11 @@ sloprank --prompts prompts.xlsx --output-dir results \
 - **Ranked Models**: A list of models ordered by their PageRank scores.
 - **Graph Representation**: A directed graph showing the flow of endorsements.
 - **Processing Times**: Benchmark of evaluation times for each model.
+- **Interactive Visualizations**: HTML-based interactive graphs with node and edge details.
+- **Static Visualizations**: PNG images of the endorsement graph.
+- **Confidence Intervals**: Statistical confidence bounds for model rankings.
+- **Significance Tests**: Statistical significance indicators between adjacent ranks.
+- **Category Rankings**: Model performance across different prompt categories.
 
 ---
 
