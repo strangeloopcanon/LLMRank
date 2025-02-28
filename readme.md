@@ -4,6 +4,12 @@ SlopRank is an evaluation framework for ranking LLMs using peer-based cross-eval
 
 You can use it with a large set of heterogeneous prompts to get overall rankings, or with smaller targeted sets to evaluate models for your specific use case.
 
+## Interactive Dashboard
+
+![Dashboard Preview](results/visualizations/endorsement_graph.png)
+
+**[➡️ View Interactive Dashboard](https://htmlpreview.github.io/?https://github.com/strangeloopcanon/llmrank/blob/main/docs/index.html)**
+
 ### Example Ranking:
 ```
 === PageRank Rankings ===
@@ -167,7 +173,7 @@ If you prefer using Jupyter Notebook:
 - **Significance Tests**: Statistical significance indicators between adjacent ranks.
 - **Category Rankings**: Model performance across different prompt categories.
 
-### Interactive Dashboard
+#### Dashboard Details
 
 The dashboard provides:
 - Overall model rankings with confidence intervals
@@ -175,33 +181,21 @@ The dashboard provides:
 - Interactive graph visualizations
 - Model comparison tools
 
-![Dashboard Preview](results/visualizations/endorsement_graph.png)
+#### Generating Your Own Dashboard
 
-#### Viewing the Dashboard
+You can generate your own interactive dashboard:
 
-There are several ways to view the interactive dashboard:
+```bash
+# Generate dashboard with all features
+sloprank run --prompts prompts.xlsx --output-dir results --dashboard
 
-1. **Generate locally**:
-   ```bash
-   sloprank run --prompts prompts.xlsx --output-dir results --dashboard
-   ```
-   
-   Or view an existing dashboard with:
-   ```bash
-   sloprank dashboard --output-dir results
-   ```
+# View an existing dashboard
+sloprank dashboard --output-dir results
+```
 
-2. **Direct viewing on GitHub**:
-   You can view the HTML dashboard directly using this link:
-   
-   [View Interactive Dashboard](https://htmlpreview.github.io/?https://github.com/strangeloopcanon/llmrank/blob/main/docs/index.html)
+#### Download Options
 
-3. **Download and open**:
-   You can download the dashboard file from:
-   
-   [Download Dashboard HTML](https://raw.githubusercontent.com/strangeloopcanon/llmrank/main/docs/index.html)
-   
-   And open it in any browser locally.
+- **[⬇️ Download Dashboard HTML](https://raw.githubusercontent.com/strangeloopcanon/llmrank/main/docs/index.html)** - Save and open locally in any browser
 
 ## Applications
 - **Benchmarking**: Evaluate and rank new or existing LLMs.
