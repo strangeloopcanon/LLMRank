@@ -156,13 +156,6 @@ The `examples/` directory contains standalone scripts for each advanced feature:
    python examples/dashboard.py
    ```
 
-### Using the Notebook
-
-If you prefer using Jupyter Notebook:
-1. Open `llmrank.ipynb`
-2. Run the cells to execute the workflow
-3. Inspect the results
-
 ## Outputs
 - **Ranked Models**: A list of models ordered by their PageRank scores.
 - **Graph Representation**: A directed graph showing the flow of endorsements.
