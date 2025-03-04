@@ -22,7 +22,7 @@ You can use it with a large set of heterogeneous prompts to get overall rankings
 5  gemini-exp-1206                      0.154884
 ```
 
-Supported models include ChatGPT-4o, Claude-3.7-Sonnet, Deepseek-Reasoner, Gemini-2.0-Pro, O1, and others.
+It supports pretty much all models, anything that can be run with the 'llm' library.
 
 ## Features
 - **Peer-Based Evaluation**: Models evaluate each other's responses, mimicking a collaborative and competitive environment.
@@ -70,7 +70,7 @@ pip install .
 
 ### API Keys Setup
 
-Set up API keys using Simon Willison's llm tool:
+Set up API keys using Simon Willison's llm tool. Example:
 ```bash
 llm keys set anthropic 
 llm keys set openai
@@ -98,11 +98,11 @@ If you want to override the default models:
 
 ```bash
 sloprank --prompts prompts.xlsx --output-dir results \
-         --models "gpt-4o,claude-3-5-sonnet-latest,o1-preview"
+         --models "chatgpt-4o,o1,claude-3-7-sonnet-latest, deepseek-reasoner, gemini-2.0-pro-exp-02-05" --visualize --confidence --categories
 ```
 
 ### Configuration
-- **Models**: Update the `MODEL_NAMES` list in the notebook to include the models you want to evaluate.
+- **Models**: Update the `MODEL_NAMES` list to include the models you want to evaluate.
 - **Prompts**: Define your prompts in the `raw_prompts` list.
 - **Evaluation Method**: Choose between numeric ratings (`EVALUATION_METHOD = 1`) or upvotes/downvotes (`EVALUATION_METHOD = 2`).
 - **Subset Evaluation**: Toggle `USE_SUBSET_EVALUATION` to reduce evaluation costs.
@@ -173,18 +173,6 @@ The dashboard provides:
 - Category-specific performance analysis
 - Interactive graph visualizations
 - Model comparison tools
-
-#### Generating Your Own Dashboard
-
-You can generate your own interactive dashboard:
-
-```bash
-# Generate dashboard with all features
-sloprank run --prompts prompts.xlsx --output-dir results --dashboard
-
-# View an existing dashboard
-sloprank dashboard --output-dir results
-```
 
 #### Download Options
 
