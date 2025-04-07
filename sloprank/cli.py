@@ -237,7 +237,7 @@ def cli():
 
 
 @cli.command()
-@click.option("--prompts", default="prompts.xlsx", help="Path to prompts Excel file")
+@click.option("--prompts", default="prompts.csv", help="Path to prompts Excel file")
 @click.option("--output-dir", default="results", help="Output directory for results")
 @click.option("--models", help="Comma-separated list of models to evaluate")
 @click.option(
@@ -318,7 +318,7 @@ def run(prompts, output_dir, models, responses, visualize, interactive, confiden
         prompts_df = pd.DataFrame({'Questions': responses_df['prompt'].unique()})
     else:
         # 1) Read prompts
-        prompts_df = pd.read_excel(prompts)
+        prompts_df = pd.read_csv(prompts)
         prompt_pairs = list(
             zip(
                 prompts_df["Questions"].tolist(),

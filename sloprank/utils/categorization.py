@@ -28,14 +28,14 @@ def categorize_prompts(prompts_file=None, save_categorized=True):
         Dictionary mapping category names to lists of prompts
     """
     if prompts_file is None:
-        prompts_file = Path("prompts.xlsx")
+        prompts_file = Path("prompts.csv")
     else:
         prompts_file = Path(prompts_file)
     
     logger.info(f"Reading prompts from {prompts_file}...")
     
     # Read prompts from Excel
-    prompts_df = pd.read_excel(prompts_file)
+    prompts_df = pd.read_csv(prompts_file)
     
     # Check if a Category column exists
     if 'Category' in prompts_df.columns:
@@ -66,7 +66,7 @@ def categorize_prompts(prompts_file=None, save_categorized=True):
             
             # Save the categorized DataFrame back to Excel
             output_path = prompts_file.with_stem(prompts_file.stem + "_categorized")
-            prompts_df.to_excel(output_path, index=False)
+            prompts_df.to_csv(output_path, index=False)
             logger.info(f"Saved categorized prompts to {output_path}")
     
     # Return categories as a dictionary with lists of prompts

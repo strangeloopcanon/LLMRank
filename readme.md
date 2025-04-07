@@ -89,15 +89,15 @@ After installing, you can run the entire SlopRank workflow via the `sloprank` co
 ### Basic Usage
 
 ```bash
-sloprank --prompts prompts.xlsx --output-dir results
+sloprank --prompts prompts.csv --output-dir results
 ```
-- `--prompts prompts.xlsx` tells SlopRank where to find your list of prompts.
+- `--prompts prompts.csv` tells SlopRank where to find your list of prompts.
 - `--output-dir results` puts all CSV and JSON outputs in the results/ folder.
 
 If you want to override the default models:
 
 ```bash
-sloprank --prompts prompts.xlsx --output-dir results \
+sloprank --prompts prompts.csv --output-dir results \
          --models "chatgpt-4o,o1,claude-3-7-sonnet-latest, deepseek-reasoner, gemini-2.0-pro-exp-02-05" --visualize --confidence --categories
 ```
 
@@ -114,7 +114,7 @@ sloprank --prompts prompts.xlsx --output-dir results \
 Run SlopRank with all advanced features:
 
 ```bash
-sloprank run --prompts prompts.xlsx --output-dir results --visualize --confidence --categories
+sloprank run --prompts prompts.csv --output-dir results --visualize --confidence --categories
 ```
 
 #### Interactive Dashboard
@@ -122,7 +122,7 @@ sloprank run --prompts prompts.xlsx --output-dir results --visualize --confidenc
 Add the `--dashboard` flag to launch an interactive web dashboard:
 
 ```bash
-sloprank run --prompts prompts.xlsx --output-dir results --dashboard
+sloprank run --prompts prompts.csv --output-dir results --dashboard
 ```
 
 Launch the dashboard for existing results:

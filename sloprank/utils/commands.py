@@ -90,7 +90,7 @@ def confidence(evaluations, output, iterations, confidence_level):
 
 
 @utils.command()
-@click.option("--prompts", default="prompts.xlsx", help="Path to prompts Excel file")
+@click.option("--prompts", default="prompts.csv", help="Path to prompts Excel file")
 @click.option("--evaluations", default="results/evaluations.csv", help="Path to evaluations CSV file")
 @click.option("--output-dir", default="results", help="Output directory for category analysis")
 def categorize(prompts, evaluations, output_dir):

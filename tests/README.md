@@ -7,8 +7,8 @@ This directory contains test files for the SlopRank library.
 | File | Description |
 |------|-------------|
 | `test_sloprank.py` | Simple end-to-end test for the SlopRank library |
-| `tiny_prompts.xlsx` | Minimal test prompts with just 2 simple questions |
-| `mini_prompts.xlsx` | Small test prompts with 3 more comprehensive questions |
+| `tiny_prompts.csv` | Minimal test prompts with just 2 simple questions |
+| `mini_prompts.csv` | Small test prompts with 3 more comprehensive questions |
 
 ## Running Tests
 

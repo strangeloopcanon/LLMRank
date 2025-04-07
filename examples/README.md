@@ -62,7 +62,7 @@ python examples/dashboard.py
 
 For the best experience, run the tools in this order:
 
-1. Run SlopRank: `sloprank --prompts prompts.xlsx --output-dir results`
+1. Run SlopRank: `sloprank --prompts prompts.csv --output-dir results`
 2. Generate visualizations: `python examples/generate_visualization.py`
 3. Compute confidence intervals: `python examples/compute_confidence.py`
 4. Analyze categories: `python examples/prompt_categorization.py`
@@ -74,7 +74,7 @@ For the best experience, run the tools in this order:
 All these features are now integrated into the main `sloprank` CLI tool:
 
 ```bash
-sloprank run --prompts prompts.xlsx --output-dir results --visualize --confidence --categories --dashboard
+sloprank run --prompts prompts.csv --output-dir results --visualize --confidence --categories --dashboard
 ```
 
 These standalone example scripts are provided for educational purposes and for users who want to use each feature independently.

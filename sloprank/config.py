@@ -74,13 +74,17 @@ class EvalConfig:
 
 DEFAULT_CONFIG = EvalConfig(
     model_names=[
-        "gemini-2.0-flash-thinking-exp-1219",
-        "gemini-exp-1206",
-        "claude-3-5-sonnet-latest",
-        "o1-preview",
+        "gemini-2.5-pro-exp-03-25",
+        "claude-3.7-sonnet-latest",
         "gpt-4o",
         "deepseek-chat"
     ],
+    # model_names=[
+    #     "gemini-2.5-pro-exp-03-25",
+    #     "claude-3.7-sonnet-latest",
+    #     "o1",
+    #     "deepseek-reasoner"
+    # ],
     evaluation_method=1,  # numeric
     use_subset_evaluation=True,
     evaluators_subset_size=3,

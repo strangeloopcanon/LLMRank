@@ -17,7 +17,7 @@ prompts = [
 
 # Create a simple prompts file
 test_df = pd.DataFrame({"Questions": prompts})
-test_df.to_excel("tiny_prompts.xlsx", index=False)
+test_df.to_csv("tiny_prompts.csv", index=False)
 
 # Define a simple test configuration
 config = EvalConfig(

@@ -5,7 +5,7 @@ import re
 from pathlib import Path
 from collections import defaultdict
 
-def auto_categorize_prompts(prompts_file="prompts.xlsx"):
+def auto_categorize_prompts(prompts_file="prompts.csv"):
     """
     Reads prompts from Excel file and automatically categorizes them.
     If a 'Category' column exists, it will use those categories.
@@ -14,7 +14,7 @@ def auto_categorize_prompts(prompts_file="prompts.xlsx"):
     print(f"Reading prompts from {prompts_file}...")
     
     # Read prompts from Excel
-    prompts_df = pd.read_excel(prompts_file)
+    prompts_df = pd.read_csv(prompts_file)
     
     # Check if a Category column exists
     if 'Category' in prompts_df.columns:
@@ -44,7 +44,7 @@ def auto_categorize_prompts(prompts_file="prompts.xlsx"):
         
         # Save the categorized DataFrame back to Excel
         output_path = Path(prompts_file).with_stem(Path(prompts_file).stem + "_categorized")
-        prompts_df.to_excel(output_path, index=False)
+        prompts_df.to_csv(output_path, index=False)
         print(f"Saved categorized prompts to {output_path}")
     
     # Return categories as a dictionary with lists of prompts
