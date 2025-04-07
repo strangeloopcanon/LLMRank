@@ -160,3 +160,6 @@ cython_debug/
 
 # Ignore Claude's reference file
 CLAUDE.md
+
+# Ignore test output files
+tests/test_results/

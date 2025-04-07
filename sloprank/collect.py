@@ -6,11 +6,18 @@ from typing import List, Tuple
 from .config import logger, EvalConfig
 
 try:
-    # If you have a custom LLM module that provides get_model()
-    import llm
+    # Try to import parallm first
+    from parallm import query_model_all
+    HAS_PARALLM = True
 except ImportError:
-    logger.warning("Could not import 'llm' module. Provide your own LLM interface or mock it.")
-    llm = None
+    logger.warning("Could not import 'parallm' module. Falling back to llm or mock.")
+    HAS_PARALLM = False
+    try:
+        # If you have a custom LLM module that provides get_model()
+        import llm
+    except ImportError:
+        logger.warning("Could not import 'llm' module. Provide your own LLM interface or mock it.")
+        llm = None
 
 def collect_responses(prompt_pairs: List[Tuple[str, str]], config: EvalConfig) -> pd.DataFrame:
     """
@@ -22,61 +29,102 @@ def collect_responses(prompt_pairs: List[Tuple[str, str]], config: EvalConfig) -
     else:
         existing_df = pd.DataFrame(columns=["prompt","model"])
 
-    new_rows = []
-    for i, (prompt, answer_key) in enumerate(prompt_pairs, start=1):
-        logger.info(f"Processing prompt {i}/{len(prompt_pairs)}: {prompt[:50]}...")
+    # Extract prompts and answer keys
+    prompts = [p[0] for p in prompt_pairs]
+    answer_keys = [p[1] for p in prompt_pairs]
 
-        for model_name in config.model_names:
-            # Check if we already have a response
-            subset = existing_df[
-                (existing_df["prompt"] == prompt) &
-                (existing_df["model"] == model_name)
-            ]
-            if not subset.empty:
-                logger.info(f"Skipping existing response for model={model_name}, prompt={prompt[:40]}...")
-                continue
+    # If we have parallm, use it for batch processing
+    if HAS_PARALLM:
+        logger.info(f"Using parallm to query {len(config.model_names)} models for {len(prompts)} prompts...")
+        
+        # Create a temporary CSV with the prompts
+        # Note: parallm expects a column named 'prompt', but our internal code uses 'Questions'
+        prompts_df = pd.DataFrame({"prompt": prompts})
+        temp_prompts_path = config.output_dir / "temp_prompts.csv"
+        prompts_df.to_csv(temp_prompts_path, index=False)
+        
+        # Use parallm to query all models at once
+        responses_df = query_model_all(str(temp_prompts_path), config.model_names)
+        
+        # Check if output.csv was created by parallm and use that instead if it exists
+        output_path = Path("output.csv")
+        if output_path.exists():
+            logger.info(f"Using outputs from {output_path}")
+            responses_df = pd.read_csv(output_path)
+            # Clean up parallm's output file
+            import os
+            os.remove(output_path)
+        
+        # Add answer keys and additional metadata
+        responses_df['Answer_key'] = responses_df['prompt'].map(dict(zip(prompts, answer_keys)))
+        responses_df['is_valid'] = responses_df['response'].apply(lambda x: bool(x and len(str(x).strip()) >= 10))
+        responses_df['token_count'] = responses_df['response'].apply(lambda x: len(str(x).split()) if x else 0)
+        responses_df['response_time'] = 0.0  # Default value since parallm doesn't track this
+        responses_df['error'] = None  # Default value
+        
+        # Clean up temp file
+        import os
+        if os.path.exists(temp_prompts_path):
+            os.remove(temp_prompts_path)
+    else:
+        # Fall back to original implementation
+        new_rows = []
+        for i, (prompt, answer_key) in enumerate(prompt_pairs, start=1):
+            logger.info(f"Processing prompt {i}/{len(prompt_pairs)}: {prompt[:50]}...")
 
-            start_time = time.time()
-            logger.info(f"Querying {model_name} for new response...")
-            raw_response = None
-            tokens_used = 0
-            valid = False
-            error_msg = None
+            for model_name in config.model_names:
+                # Check if we already have a response
+                subset = existing_df[
+                    (existing_df["prompt"] == prompt) &
+                    (existing_df["model"] == model_name)
+                ]
+                if not subset.empty:
+                    logger.info(f"Skipping existing response for model={model_name}, prompt={prompt[:40]}...")
+                    continue
 
-            try:
-                if llm is not None:
-                    model = llm.get_model(model_name)
-                    response_obj = model.prompt(prompt)
-                    raw_response = response_obj.text()
-                else:
-                    # fallback mock
-                    raw_response = f"[MOCK] {model_name} responding to: {prompt[:40]}"
+                start_time = time.time()
+                logger.info(f"Querying {model_name} for new response...")
+                raw_response = None
+                tokens_used = 0
+                valid = False
+                error_msg = None
 
-                valid = (raw_response and len(raw_response.strip()) >= 10)
-                tokens_used = len(raw_response.split()) if valid else 0
+                try:
+                    if llm is not None:
+                        model = llm.get_model(model_name)
+                        response_obj = model.prompt(prompt)
+                        raw_response = response_obj.text()
+                    else:
+                        # fallback mock
+                        raw_response = f"[MOCK] {model_name} responding to: {prompt[:40]}"
 
-            except Exception as e:
-                error_msg = str(e)
-                logger.error(f"Error from {model_name}: {error_msg}")
+                    valid = (raw_response and len(raw_response.strip()) >= 10)
+                    tokens_used = len(raw_response.split()) if valid else 0
 
-            elapsed = time.time() - start_time
+                except Exception as e:
+                    error_msg = str(e)
+                    logger.error(f"Error from {model_name}: {error_msg}")
 
-            new_rows.append({
-                'prompt': prompt,
-                'model': model_name,
-                'response': raw_response if valid else None,
-                'is_valid': valid,
-                'response_time': elapsed,
-                'Answer_key': answer_key,
-                'token_count': tokens_used,
-                'error': error_msg
-            })
+                elapsed = time.time() - start_time
 
-            if config.request_delay > 0:
-                time.sleep(config.request_delay)
+                new_rows.append({
+                    'prompt': prompt,
+                    'model': model_name,
+                    'response': raw_response if valid else None,
+                    'is_valid': valid,
+                    'response_time': elapsed,
+                    'Answer_key': answer_key,
+                    'token_count': tokens_used,
+                    'error': error_msg
+                })
 
-    collected_df = pd.DataFrame(new_rows)
-    combined_df = pd.concat([existing_df, collected_df], ignore_index=True)
+                if config.request_delay > 0:
+                    time.sleep(config.request_delay)
+
+        responses_df = pd.DataFrame(new_rows)
+
+    # Combine with existing responses
+    combined_df = pd.concat([existing_df, responses_df], ignore_index=True)
     combined_df.drop_duplicates(subset=["prompt","model"], keep="first", inplace=True)
     combined_df.to_csv(resp_path, index=False)
     logger.info(f"Responses saved to {resp_path}")

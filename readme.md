@@ -224,3 +224,23 @@ Contributions are welcome! If you have ideas for improving the framework, feel f
 Special thanks to:
 - [SimonW](https://github.com/simonw) for the `llm` library.
 - The AI community
+## Using parallm for More Efficient Response Collection
+
+SlopRank can now use the `parallm` library for more efficient parallel model querying:
+
+```python
+# Install with pip
+pip install "sloprank[parallm]"
+
+# parallm is automatically used if available
+sloprank run --prompts prompts.csv --output-dir results --models "gpt-4o,claude-3.5-sonnet-latest"
+
+# Or use parallm directly
+from parallm import query_model_all
+
+# Query multiple models with all prompts in a CSV file
+df = query_model_all("prompts.csv", ["gpt-4", "claude-3-5-sonnet", "gemini-2.0-flash"])
+print(df)
+```
+
+This integration significantly speeds up the response collection process by running queries in parallel.

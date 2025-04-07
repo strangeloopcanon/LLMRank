@@ -9,23 +9,18 @@ from sloprank.collect import collect_responses, collect_raw_evaluations
 from sloprank.parse import parse_evaluation_rows
 from sloprank.rank import build_endorsement_graph, compute_pagerank, finalize_rankings
 
-# Define simpler prompts
-prompts = [
-    "What is the capital of France?",
-    "Name three primary colors",
-]
-
-# Create a simple prompts file
-test_df = pd.DataFrame({"Questions": prompts})
-test_df.to_csv("tiny_prompts.csv", index=False)
+# Use existing tiny_prompts.csv file
+prompts_file = Path(__file__).parent / "tiny_prompts.csv"
+test_df = pd.read_csv(prompts_file)
+prompts = test_df["Questions"].tolist()
 
 # Define a simple test configuration
 config = EvalConfig(
-    model_names=["deepseek-reasoner", "claude-3.7-sonnet", "chatgpt-4o"],
+    model_names=["deepseek-chat", "claude-3.5-haiku", "gpt-4o"],
     evaluation_method=1,  # numeric
     use_subset_evaluation=False,  # All models evaluate each other
     evaluators_subset_size=2,  # This will be ignored since subset_evaluation is False
-    output_dir=Path("test_results"),
+    output_dir=Path(__file__).parent / "test_results",
     request_delay=0.0
 )
 
@@ -49,20 +44,20 @@ print(f"Saved raw evaluations to {config.output_dir}/raw_evaluations.csv")
 
 # Parse evaluations
 print("Parsing evaluations...")
-evaluations_df = parse_evaluation_rows(raw_evaluations_df)
+evaluations_df = parse_evaluation_rows(raw_evaluations_df, config)
 evaluations_df.to_csv(config.output_dir / "evaluations.csv", index=False)
 print(f"Saved parsed evaluations to {config.output_dir}/evaluations.csv")
 
 # Build graph and compute rankings
 print("Building graph and computing rankings...")
-G = build_endorsement_graph(evaluations_df)
+G = build_endorsement_graph(evaluations_df, config)
 pagerank_scores = compute_pagerank(G)
-rankings = finalize_rankings(config, pagerank_scores)
+rankings = finalize_rankings(pagerank_scores, config, G, evaluations_df)
 
 # Save rankings to file
 rankings_file = config.output_dir / "rankings.json"
 with open(rankings_file, "w") as f:
-    json.dump({"rankings": rankings, "metadata": {"evaluation_method": config.evaluation_method}}, f, indent=4)
+    json.dump(rankings, f, indent=4)
 print(f"Saved rankings to {rankings_file}")
 
 print("Test completed successfully!")
