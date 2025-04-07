@@ -26,8 +26,12 @@ bump-major:
 
 git-release:
 	git add -A
-	git commit -m "Release v$(VERSION)"
-	git tag v$(VERSION)
+	git commit -m "Release v$(VERSION)" || echo "Nothing to commit"
+	@if git rev-parse "v$(VERSION)" >/dev/null 2>&1; then \
+		echo "⚠️ Tag v$(VERSION) already exists. Skipping tag creation."; \
+	else \
+		git tag v$(VERSION); \
+	fi
 	git push
 	git push --tags
 	@python scripts/create_github_release.py v$(VERSION)
