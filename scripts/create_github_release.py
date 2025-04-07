@@ -3,7 +3,7 @@ import sys
 import requests
 
 TAG = sys.argv[1]
-REPO = "strangeloopcanon/LLMRank"  # change if needed
+REPO = "strangeloopcanon/LLMRank"
 TOKEN = os.getenv("GITHUB_TOKEN")
 
 if not TOKEN:
