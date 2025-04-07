@@ -226,13 +226,13 @@ Special thanks to:
 - The AI community
 ## Using parallm for More Efficient Response Collection
 
-SlopRank can now use the `parallm` library for more efficient parallel model querying:
+SlopRank uses the `parallm` library for more efficient parallel model querying:
 
 ```python
 # Install with pip
-pip install "sloprank[parallm]"
+pip install sloprank
 
-# parallm is automatically used if available
+# parallm is included as a dependency and automatically used
 sloprank run --prompts prompts.csv --output-dir results --models "gpt-4o,claude-3.5-sonnet-latest"
 
 # Or use parallm directly

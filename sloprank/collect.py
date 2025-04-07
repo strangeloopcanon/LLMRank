@@ -6,11 +6,14 @@ from typing import List, Tuple
 from .config import logger, EvalConfig
 
 try:
-    # Try to import parallm first
+    # Import parallm for efficient response collection
     from parallm import query_model_all
     HAS_PARALLM = True
 except ImportError:
-    logger.warning("Could not import 'parallm' module. Falling back to llm or mock.")
+    # This should not happen with normal installation as parallm is now a core dependency
+    logger.error("Could not import 'parallm' module. This is a required dependency for SlopRank.")
+    logger.error("Please ensure parallm is installed with: pip install parallm")
+    logger.warning("Falling back to llm or mock response generation (not recommended for production).")
     HAS_PARALLM = False
     try:
         # If you have a custom LLM module that provides get_model()
