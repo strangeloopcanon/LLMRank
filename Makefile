@@ -32,4 +32,11 @@ git-release:
 	git push --tags
 	@python scripts/create_github_release.py v$(VERSION)
 
-publish: bump-patch build check upload git-release
+BUMP ?= patch
+
+publish:
+	@make bump-$(BUMP)
+	@make build
+	@make check
+	@make upload
+	@make git-release
