@@ -60,6 +60,10 @@ class EvalConfig:
     
     def __post_init__(self):
         self.output_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Strip any whitespace from model names
+        self.model_names = [model.strip() for model in self.model_names]
+        
         if self.evaluation_method not in {1, 2}:
             raise ValueError("evaluation_method must be 1 or 2")
         if self.use_subset_evaluation and self.evaluators_subset_size >= len(self.model_names):

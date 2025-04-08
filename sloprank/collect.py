@@ -172,7 +172,9 @@ def collect_raw_evaluations(responses_df: pd.DataFrame, config: EvalConfig) -> p
             answer_key_text = f"The Answer Key is:\n{answer_key}\n---\n" if answer_key else ""
 
             instructions = f"""
-You are an evaluator. Score each model's answer (1-10) in JSON format, e.g.:
+You are an evaluator. Score each model's answer (1-10) in JSON format.
+
+Important! Your response MUST be a valid JSON object with the exact format:
 {{"Model_1": 7, "Model_2": 9}}
 
 Problem:
@@ -182,6 +184,8 @@ Answers:
 {answers_section}
 
 {answer_key_text}
+
+After reading each answer, assign a score from 1-10. Return your scores in JSON format ONLY without explanations.
 """
 
             model_mapping_str = json.dumps(model_to_anon, sort_keys=True)
@@ -199,16 +203,24 @@ Answers:
             try:
                 if HAS_PARALLM:
                     # Use parallm's query_model for individual evaluations
-                    raw_judgment = query_model(judge_model, instructions)
+                    logger.info(f"Getting evaluation from {judge_model} via parallm")
+                    try:
+                        raw_judgment = query_model(judge_model, instructions)
+                        logger.info(f"Raw judgment from {judge_model}: {raw_judgment[:100]}...")
+                    except Exception as e:
+                        logger.error(f"Error using parallm for {judge_model}: {str(e)}")
+                        raise
                 elif llm is not None:
+                    logger.info(f"Getting evaluation from {judge_model} via llm")
                     judge_obj = llm.get_model(judge_model)
                     judge_resp = judge_obj.prompt(instructions)
                     raw_judgment = judge_resp.text()
                 else:
                     # fallback
+                    logger.warning(f"Using mock data for {judge_model}")
                     raw_judgment = '{"Model_1": 8, "Model_2": 6}'
 
-                tokens_used = len(raw_judgment.split())
+                tokens_used = len(raw_judgment.split()) if raw_judgment else 0
             except Exception as e:
                 logger.error(f"Error: judge={judge_model}, prompt={prompt[:40]} => {str(e)}")
 
