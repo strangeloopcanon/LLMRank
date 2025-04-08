@@ -213,8 +213,12 @@ After reading each answer, assign a score from 1-10. Return your scores in JSON 
 
     new_judgments = []
     
-    # Use parallm for batch processing of evaluations if available
-    if HAS_PARALLM and eval_tasks:
+    # Check if batch evaluation is disabled via environment variable
+    import os
+    disable_batch = os.environ.get("DISABLE_BATCH_EVAL", "0") == "1"
+    
+    # Use parallm for batch processing of evaluations if available and not disabled
+    if HAS_PARALLM and eval_tasks and not disable_batch:
         logger.info(f"Using parallm to process {len(eval_tasks)} evaluation tasks in parallel")
         
         # Create a temporary CSV with evaluation prompts
