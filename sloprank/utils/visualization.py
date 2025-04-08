@@ -307,9 +307,11 @@ def generate_interactive_visualization(G, pagerank_scores, output_path, vis_conf
                 size=[pagerank_scores.get(node, 0.01) * node_size_factor / 10 for node in G.nodes()],
                 colorbar=dict(
                     thickness=15,
-                    title='PageRank Score',
-                    xanchor='left',
-                    titleside='right'
+                    title=dict(
+                        text='PageRank Score',
+                        side='right'
+                    ),
+                    xanchor='left'
                 ),
                 line=dict(width=2)
             )

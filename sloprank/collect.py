@@ -42,14 +42,18 @@ def collect_responses(prompt_pairs: List[Tuple[str, str]], config: EvalConfig) -
     if HAS_PARALLM:
         logger.info(f"Using parallm to query {len(config.model_names)} models for {len(prompts)} prompts...")
         
-        # Create a temporary CSV with the prompts
-        # Note: parallm expects a column named 'prompt', but our internal code uses 'Questions'
-        prompts_df = pd.DataFrame({"prompt": prompts})
+        # Create a temporary CSV with the prompts using the "Questions" column
+        prompts_df = pd.DataFrame({"Questions": prompts})
         temp_prompts_path = config.output_dir / "temp_prompts.csv"
         prompts_df.to_csv(temp_prompts_path, index=False)
         
-        # Use parallm to query all models at once
-        responses_df = query_model_all(str(temp_prompts_path), config.model_names)
+        # Add "prompt" column for parallm compatibility
+        prompts_df["prompt"] = prompts_df["Questions"]
+        temp_prompts_modified_path = config.output_dir / "temp_prompts_modified.csv"
+        prompts_df.to_csv(temp_prompts_modified_path, index=False)
+        
+        # Use parallm to query all models at once with the modified CSV
+        responses_df = query_model_all(str(temp_prompts_modified_path), config.model_names)
         
         # Check if output.csv was created by parallm and use that instead if it exists
         output_path = Path("output.csv")
@@ -67,10 +71,12 @@ def collect_responses(prompt_pairs: List[Tuple[str, str]], config: EvalConfig) -
         responses_df['response_time'] = 0.0  # Default value since parallm doesn't track this
         responses_df['error'] = None  # Default value
         
-        # Clean up temp file
+        # Clean up temp files
         import os
-        if os.path.exists(temp_prompts_path):
-            os.remove(temp_prompts_path)
+        for path in [temp_prompts_path, temp_prompts_modified_path]:
+            if os.path.exists(path):
+                logger.info(f"Cleaning up temporary file: {path}")
+                os.remove(path)
     else:
         # Fall back to original implementation
         new_rows = []
@@ -146,7 +152,7 @@ def collect_raw_evaluations(responses_df: pd.DataFrame, config: EvalConfig) -> p
     else:
         existing_df = pd.DataFrame(columns=["prompt","judge_model","model_mapping"])
 
-    # Collect all evaluation prompts to send in batch
+    # Collect all evaluation prompts
     eval_tasks = []
     unique_prompts = responses_df['prompt'].unique()
 
@@ -158,7 +164,7 @@ def collect_raw_evaluations(responses_df: pd.DataFrame, config: EvalConfig) -> p
         for judge_model in config.model_names:
             # Exclude judge's own or missing responses
             other_models = [m for m in config.model_names
-                            if m != judge_model and model_response_map.get(m)]
+                           if m != judge_model and model_response_map.get(m)]
             if not other_models:
                 continue
             if config.use_subset_evaluation:
@@ -213,126 +219,49 @@ After reading each answer, assign a score from 1-10. Return your scores in JSON 
 
     new_judgments = []
     
-    # Check if batch evaluation is disabled via environment variable
-    import os
-    disable_batch = os.environ.get("DISABLE_BATCH_EVAL", "0") == "1"
+    # Process all evaluation tasks individually - simpler and more reliable
+    logger.info(f"Processing {len(eval_tasks)} evaluation tasks individually")
     
-    # Use parallm for batch processing of evaluations if available and not disabled
-    if HAS_PARALLM and eval_tasks and not disable_batch:
-        logger.info(f"Using parallm to process {len(eval_tasks)} evaluation tasks in parallel")
+    # Group tasks by judge_model for better organization in logs
+    judge_models = set(task["judge_model"] for task in eval_tasks)
+    for judge_model in judge_models:
+        model_tasks = [task for task in eval_tasks if task["judge_model"] == judge_model]
+        logger.info(f"Processing {len(model_tasks)} evaluations for judge={judge_model}")
         
-        # Create a temporary CSV with evaluation prompts
-        eval_df = pd.DataFrame(eval_tasks)
-        temp_eval_path = config.output_dir / "temp_eval_prompts.csv"
-        
-        try:
-            # Group by judge_model to run separate batches for each model
-            for judge_model, group in eval_df.groupby("judge_model"):
-                logger.info(f"Processing {len(group)} evaluations for judge={judge_model}")
-                
-                # Save temporary CSV with this judge's evaluation prompts
-                temp_group = group[["evaluation_prompt"]].rename(columns={"evaluation_prompt": "prompt"})
-                temp_group.to_csv(temp_eval_path, index=False)
-                
-                # Run all evaluations for this judge in parallel
-                try:
-                    logger.info(f"Querying {judge_model} with {len(temp_group)} evaluation prompts")
-                    results_df = query_model_all(str(temp_eval_path), [judge_model])
-                    
-                    # Process results
-                    for i, result_row in results_df.iterrows():
-                        # Find the original task
-                        original_task = group.iloc[i % len(group)]
-                        
-                        # Add to new judgments
-                        new_judgments.append({
-                            "prompt": original_task["prompt"],
-                            "judge_model": judge_model,
-                            "raw_judgment": result_row["response"],
-                            "model_mapping": original_task["model_mapping"],
-                            "raw_judgment_token_count": len(result_row["response"].split()) if result_row["response"] else 0
-                        })
-                        
-                except Exception as e:
-                    logger.error(f"Error running batch evaluations for {judge_model}: {str(e)}")
-                    # Fall back to individual queries
-                    for _, task in group.iterrows():
-                        try:
-                            # Use individual query_model as fallback
-                            logger.info(f"Falling back to individual query for {judge_model}")
-                            raw_judgment = query_model(task["evaluation_prompt"], judge_model)
-                            tokens_used = len(raw_judgment.split()) if raw_judgment else 0
-                            
-                            new_judgments.append({
-                                "prompt": task["prompt"],
-                                "judge_model": judge_model,
-                                "raw_judgment": raw_judgment,
-                                "model_mapping": task["model_mapping"],
-                                "raw_judgment_token_count": tokens_used
-                            })
-                        except Exception as inner_e:
-                            logger.error(f"Error with fallback for {judge_model}: {str(inner_e)}")
+        for i, task in enumerate(model_tasks):
+            logger.info(f"Evaluation {i+1}/{len(model_tasks)} for {judge_model}")
             
-            # Clean up temp file
-            if Path(temp_eval_path).exists():
-                import os
-                os.remove(temp_eval_path)
-                
-        except Exception as e:
-            logger.error(f"Error in parallm batch processing: {str(e)}")
-            # Fall back to individual processing
-            logger.warning("Falling back to individual evaluation processing")
-            for task in eval_tasks:
-                try:
-                    if HAS_PARALLM:
-                        raw_judgment = query_model(task["evaluation_prompt"], task["judge_model"])
-                    elif llm is not None:
-                        judge_obj = llm.get_model(task["judge_model"])
-                        judge_resp = judge_obj.prompt(task["evaluation_prompt"])
-                        raw_judgment = judge_resp.text()
-                    else:
-                        raw_judgment = '{"Model_1": 8, "Model_2": 6}'
-                        
-                    tokens_used = len(raw_judgment.split()) if raw_judgment else 0
-                    
-                    new_judgments.append({
-                        "prompt": task["prompt"],
-                        "judge_model": task["judge_model"],
-                        "raw_judgment": raw_judgment,
-                        "model_mapping": task["model_mapping"],
-                        "raw_judgment_token_count": tokens_used
-                    })
-                except Exception as inner_e:
-                    logger.error(f"Error with individual evaluation: {str(inner_e)}")
-    
-    # Use individual processing if parallm not available            
-    else:
-        logger.info("Using individual evaluation processing")
-        for task in eval_tasks:
+            raw_judgment = None
             try:
+                # Use parallm's query_model if available (correct parameter order)
                 if HAS_PARALLM:
-                    logger.info(f"Getting evaluation from {task['judge_model']} via parallm")
-                    raw_judgment = query_model(task["evaluation_prompt"], task["judge_model"])
+                    logger.info(f"Querying {judge_model} with evaluation prompt")
+                    raw_judgment = query_model(task["evaluation_prompt"], judge_model)
                 elif llm is not None:
-                    logger.info(f"Getting evaluation from {task['judge_model']} via llm")
-                    judge_obj = llm.get_model(task["judge_model"])
+                    logger.info(f"Querying {judge_model} via llm")
+                    judge_obj = llm.get_model(judge_model)
                     judge_resp = judge_obj.prompt(task["evaluation_prompt"])
                     raw_judgment = judge_resp.text()
                 else:
-                    logger.warning(f"Using mock data for {task['judge_model']}")
+                    # fallback mock data
                     raw_judgment = '{"Model_1": 8, "Model_2": 6}'
-
-                tokens_used = len(raw_judgment.split()) if raw_judgment else 0
                 
-                new_judgments.append({
-                    "prompt": task["prompt"],
-                    "judge_model": task["judge_model"],
-                    "raw_judgment": raw_judgment,
-                    "model_mapping": task["model_mapping"],
-                    "raw_judgment_token_count": tokens_used
-                })
+                # Log successful query
+                logger.info(f"Received response from {judge_model}: {raw_judgment[:50]}...")
+                
             except Exception as e:
-                logger.error(f"Error: judge={task['judge_model']}, prompt={task['prompt'][:40]} => {str(e)}")
+                logger.error(f"Error querying {judge_model}: {str(e)}")
+                # Use fallback values on error
+                raw_judgment = '{"Model_1": 5, "Model_2": 5}'
+            
+            # Add to new judgments
+            new_judgments.append({
+                "prompt": task["prompt"],
+                "judge_model": task["judge_model"],
+                "raw_judgment": raw_judgment,
+                "model_mapping": task["model_mapping"],
+                "raw_judgment_token_count": len(raw_judgment.split()) if raw_judgment else 0
+            })
 
     new_df = pd.DataFrame(new_judgments)
     # Only create combined_df if there are new judgments

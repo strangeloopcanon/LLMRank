@@ -38,12 +38,31 @@ def categorize_prompts(prompts_df: pd.DataFrame, config: EvalConfig) -> Dict[str
     """
     categories = {}
     
+    # Determine which column has the prompts
+    prompt_column = None
+    if 'Questions' in prompts_df.columns:
+        prompt_column = 'Questions'
+    elif 'prompt' in prompts_df.columns:
+        prompt_column = 'prompt'
+    elif len(prompts_df.columns) > 0:
+        prompt_column = prompts_df.columns[0]
+    else:
+        logger.warning("No columns found in prompts DataFrame for categorization")
+        return {}
+    
+    # Determine which column has categories
+    category_column = None
     if 'Category' in prompts_df.columns:
+        category_column = 'Category'
+    elif 'category' in prompts_df.columns:
+        category_column = 'category'
+    
+    if category_column:
         # Use explicit categories from the prompts file
-        for category in prompts_df['Category'].unique():
+        for category in prompts_df[category_column].unique():
             if pd.notna(category) and category:
-                category_prompts = prompts_df[prompts_df['Category'] == category]['Questions'].tolist()
-                categories[category] = category_prompts
+                category_prompts = prompts_df[prompts_df[category_column] == category][prompt_column].tolist()
+                categories[category.lower() if isinstance(category, str) else str(category)] = category_prompts
     elif config.prompt_categories:
         # Use categories from the configuration
         return config.prompt_categories
@@ -62,8 +81,11 @@ def categorize_prompts(prompts_df: pd.DataFrame, config: EvalConfig) -> Dict[str
             categories[category] = []
         
         # Categorize prompts based on keywords
-        for prompt in prompts_df['Questions'].tolist():
+        for prompt in prompts_df[prompt_column].tolist():
             categorized = False
+            if not isinstance(prompt, str):
+                prompt = str(prompt)
+            
             prompt_lower = prompt.lower()
             
             for category, terms in keywords.items():
@@ -319,14 +341,40 @@ def run(prompts, output_dir, models, responses, visualize, interactive, confiden
     else:
         # 1) Read prompts
         prompts_df = pd.read_csv(prompts)
-        prompt_pairs = list(
-            zip(
-                prompts_df["Questions"].tolist(),
-                prompts_df["Answer_key"].tolist()
-                if "Answer_key" in prompts_df.columns
-                else [None] * len(prompts_df),
-            )
-        )
+        
+        # Handle different column naming conventions
+        prompt_column = None
+        if "Questions" in prompts_df.columns:
+            prompt_column = "Questions"
+        elif "prompt" in prompts_df.columns:
+            prompt_column = "prompt"
+        elif len(prompts_df.columns) > 0:
+            # If no recognized column name but there is at least one column,
+            # assume the first column contains the prompts
+            prompt_column = prompts_df.columns[0]
+            logger.warning(f"No 'Questions' or 'prompt' column found, using first column: {prompt_column}")
+        else:
+            raise ValueError("CSV file has no columns")
+            
+        logger.info(f"Using column '{prompt_column}' for prompts")
+        
+        # Similarly handle different names for answer key column
+        answer_key_column = None
+        answer_keys = []
+        
+        if "Answer_key" in prompts_df.columns:
+            answer_key_column = "Answer_key"
+        elif "answer_key" in prompts_df.columns:
+            answer_key_column = "answer_key"
+        
+        if answer_key_column:
+            answer_keys = prompts_df[answer_key_column].tolist()
+            logger.info(f"Using column '{answer_key_column}' for answer keys")
+        else:
+            answer_keys = [None] * len(prompts_df)
+            logger.info("No answer key column found")
+            
+        prompt_pairs = list(zip(prompts_df[prompt_column].tolist(), answer_keys))
 
         # 2) Collect responses
         responses_df = collect_responses(prompt_pairs, config)
