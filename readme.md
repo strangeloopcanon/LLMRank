@@ -97,8 +97,7 @@ sloprank --prompts prompts.csv --output-dir results
 If you want to override the default models:
 
 ```bash
-sloprank --prompts prompts.csv --output-dir results \
-         --models "chatgpt-4o,o1,claude-3-7-sonnet-latest, deepseek-reasoner, gemini-2.0-pro-exp-02-05" --visualize --confidence --categories
+sloprank --prompts prompts.csv --output-dir results --models "chatgpt-4o,o1,claude-3-7-sonnet-latest, deepseek-reasoner, gemini-2.0-pro-exp-02-05" --visualize --confidence
 ```
 
 ### Configuration
