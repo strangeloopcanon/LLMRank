@@ -8,8 +8,9 @@ from .config import logger, EvalConfig
 
 try:
     # Import parallm for efficient response collection
-    from parallm import query_model_all
+    from parallm import query_model_all, query_model
     HAS_PARALLM = True
+    llm = None  # We won't use llm when parallm is available
 except ImportError:
     # This should not happen with normal installation as parallm is now a core dependency
     logger.error("Could not import 'parallm' module. This is a required dependency for SlopRank.")
@@ -196,7 +197,10 @@ Answers:
             raw_judgment = None
             tokens_used = 0
             try:
-                if llm is not None:
+                if HAS_PARALLM:
+                    # Use parallm's query_model for individual evaluations
+                    raw_judgment = query_model(judge_model, instructions)
+                elif llm is not None:
                     judge_obj = llm.get_model(judge_model)
                     judge_resp = judge_obj.prompt(instructions)
                     raw_judgment = judge_resp.text()
