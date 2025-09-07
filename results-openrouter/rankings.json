@@ -1,0 +1,210 @@
+{
+  "rankings": [
+    {
+      "model": "openrouter/openai/gpt-5",
+      "score": 0.16847011097481915
+    },
+    {
+      "model": "openrouter/qwen/qwen3-max",
+      "score": 0.15526560981312867
+    },
+    {
+      "model": "openrouter/google/gemini-2.5-pro",
+      "score": 0.14578746659558767
+    },
+    {
+      "model": "openrouter/anthropic/claude-opus-4.1",
+      "score": 0.13555256359158935
+    },
+    {
+      "model": "openrouter/x-ai/grok-4",
+      "score": 0.1352023392288148
+    },
+    {
+      "model": "openrouter/anthropic/claude-sonnet-4",
+      "score": 0.1338541911435342
+    },
+    {
+      "model": "openrouter/nousresearch/hermes-4-405b",
+      "score": 0.1258677186525262
+    }
+  ],
+  "metadata": {
+    "evaluation_method": 1,
+    "timestamp": "2025-09-05T18:04:48.013974"
+  },
+  "category_rankings": {
+    "reasoning": [
+      {
+        "model": "openrouter/openai/gpt-5",
+        "score": 0.17430497069091347
+      },
+      {
+        "model": "openrouter/google/gemini-2.5-pro",
+        "score": 0.15181656623231862
+      },
+      {
+        "model": "openrouter/qwen/qwen3-max",
+        "score": 0.1445691835060197
+      },
+      {
+        "model": "openrouter/anthropic/claude-sonnet-4",
+        "score": 0.14017243463115212
+      },
+      {
+        "model": "openrouter/anthropic/claude-opus-4.1",
+        "score": 0.13854136532118963
+      },
+      {
+        "model": "openrouter/nousresearch/hermes-4-405b",
+        "score": 0.12954936131490657
+      },
+      {
+        "model": "openrouter/x-ai/grok-4",
+        "score": 0.12104611830349994
+      }
+    ],
+    "creativity": [
+      {
+        "model": "openrouter/qwen/qwen3-max",
+        "score": 0.19787032089498574
+      },
+      {
+        "model": "openrouter/openai/gpt-5",
+        "score": 0.19103007295939647
+      },
+      {
+        "model": "openrouter/anthropic/claude-opus-4.1",
+        "score": 0.14499987708480822
+      },
+      {
+        "model": "openrouter/google/gemini-2.5-pro",
+        "score": 0.14466194083275574
+      },
+      {
+        "model": "openrouter/anthropic/claude-sonnet-4",
+        "score": 0.13343973543986454
+      },
+      {
+        "model": "openrouter/nousresearch/hermes-4-405b",
+        "score": 0.10250109470160962
+      },
+      {
+        "model": "openrouter/x-ai/grok-4",
+        "score": 0.08549695808657976
+      }
+    ],
+    "knowledge": [
+      {
+        "model": "openrouter/qwen/qwen3-max",
+        "score": 0.230685151045678
+      },
+      {
+        "model": "openrouter/anthropic/claude-opus-4.1",
+        "score": 0.2263174375315229
+      },
+      {
+        "model": "openrouter/anthropic/claude-sonnet-4",
+        "score": 0.2078302382240306
+      },
+      {
+        "model": "openrouter/nousresearch/hermes-4-405b",
+        "score": 0.19414495209100702
+      },
+      {
+        "model": "openrouter/openai/gpt-5",
+        "score": 0.07263846361795528
+      },
+      {
+        "model": "openrouter/google/gemini-2.5-pro",
+        "score": 0.03624680196311777
+      },
+      {
+        "model": "openrouter/x-ai/grok-4",
+        "score": 0.032136955526688424
+      }
+    ],
+    "uncategorized": [
+      {
+        "model": "openrouter/openai/gpt-5",
+        "score": 0.16643367778474888
+      },
+      {
+        "model": "openrouter/x-ai/grok-4",
+        "score": 0.15422265324248047
+      },
+      {
+        "model": "openrouter/qwen/qwen3-max",
+        "score": 0.15064751154294972
+      },
+      {
+        "model": "openrouter/google/gemini-2.5-pro",
+        "score": 0.14645725401938814
+      },
+      {
+        "model": "openrouter/anthropic/claude-opus-4.1",
+        "score": 0.13052286440952826
+      },
+      {
+        "model": "openrouter/anthropic/claude-sonnet-4",
+        "score": 0.12608061856312178
+      },
+      {
+        "model": "openrouter/nousresearch/hermes-4-405b",
+        "score": 0.1256354204377827
+      }
+    ]
+  },
+  "confidence_intervals": {
+    "openrouter/openai/gpt-5": {
+      "mean": 0.16805771950954243,
+      "lower_bound": 0.14854275640418269,
+      "upper_bound": 0.18889452135305,
+      "std_dev": 0.010244390640524138
+    },
+    "openrouter/anthropic/claude-opus-4.1": {
+      "mean": 0.13545523306386933,
+      "lower_bound": 0.11580551762466326,
+      "upper_bound": 0.15508631927416777,
+      "std_dev": 0.010082235807697845
+    },
+    "openrouter/anthropic/claude-sonnet-4": {
+      "mean": 0.13403056558493653,
+      "lower_bound": 0.11663732761525049,
+      "upper_bound": 0.15292269487100793,
+      "std_dev": 0.00939353104769414
+    },
+    "openrouter/x-ai/grok-4": {
+      "mean": 0.13541421681507756,
+      "lower_bound": 0.11688480461050506,
+      "upper_bound": 0.1551950474080818,
+      "std_dev": 0.009555164123263458
+    },
+    "openrouter/qwen/qwen3-max": {
+      "mean": 0.15543196085269878,
+      "lower_bound": 0.13554801921435994,
+      "upper_bound": 0.17620411609175582,
+      "std_dev": 0.010415740974695154
+    },
+    "openrouter/google/gemini-2.5-pro": {
+      "mean": 0.145526871283856,
+      "lower_bound": 0.12557672757845778,
+      "upper_bound": 0.16526113279938065,
+      "std_dev": 0.010002455058795396
+    },
+    "openrouter/nousresearch/hermes-4-405b": {
+      "mean": 0.12608343289001933,
+      "lower_bound": 0.10966111474019993,
+      "upper_bound": 0.14404672239366115,
+      "std_dev": 0.008905700093363503
+    }
+  },
+  "significance": {
+    "openrouter/openai/gpt-5_vs_openrouter/qwen/qwen3-max": false,
+    "openrouter/qwen/qwen3-max_vs_openrouter/google/gemini-2.5-pro": false,
+    "openrouter/google/gemini-2.5-pro_vs_openrouter/anthropic/claude-opus-4.1": false,
+    "openrouter/anthropic/claude-opus-4.1_vs_openrouter/x-ai/grok-4": false,
+    "openrouter/x-ai/grok-4_vs_openrouter/anthropic/claude-sonnet-4": false,
+    "openrouter/anthropic/claude-sonnet-4_vs_openrouter/nousresearch/hermes-4-405b": false
+  }
+}
