@@ -10,17 +10,20 @@ You can use it with a large set of heterogeneous prompts to get overall rankings
 
 **[➡️ View Interactive Dashboard](https://htmlpreview.github.io/?https://github.com/strangeloopcanon/llmrank/blob/main/docs/index.html)**
 
-### Example Ranking:
+### Example Ranking (OpenRouter run):
 ```
 === PageRank Rankings ===
-   model                                pagerank_score
-0  o1-preview                           0.179404
-1  gpt-4o                               0.178305
-2  deepseek-chat                        0.167105
-3  gemini-2.0-flash-thinking-exp-1219   0.164732
-4  claude-3-5-sonnet-latest             0.155571
-5  gemini-exp-1206                      0.154884
+   model                                   pagerank_score
+0  openrouter/openai/gpt-5                 0.168470
+1  openrouter/qwen/qwen3-max               0.155266
+2  openrouter/google/gemini-2.5-pro        0.145787
+3  openrouter/anthropic/claude-opus-4.1    0.135553
+4  openrouter/x-ai/grok-4                  0.135202
+5  openrouter/anthropic/claude-sonnet-4    0.133854
+6  openrouter/nousresearch/hermes-4-405b   0.125868
 ```
+
+Models in this run: gpt-5, claude opus 4.1, claude sonnet 4, grok 4, qwen 3 max, gemini 2.5 pro, nousresearch/hermes-4-405b. Results were computed using peer cross‑evaluation and PageRank over 37 prompts.
 
 It supports pretty much all models, anything that can be run with the 'llm' library.
 
