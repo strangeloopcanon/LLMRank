@@ -2,6 +2,20 @@
 
 All notable changes to SlopRank will be documented in this file.
 
+## [0.3.11] - 2025-09-09
+
+### Changed
+- Updated default model list to latest: `gpt-5`, `claude-4-sonnet`, `gemini-2.5-pro`, `deepseek-chat`.
+- Relaxed `llm` dependency to `llm>=0.23` to support latest providers.
+- Rankings JSON now includes package `version` metadata.
+- README updated with latest model examples and `llm`/parallm notes.
+
+### Added
+- Offline smoke test (`tests/test_smoke.py`) to exercise parsing, graph, and ranking without network calls.
+
+### Fixed
+- Resolved version mismatch between `pyproject.toml` and `sloprank/__init__.py`.
+
 ## [0.2.3] - 2025-02-28
 
 ### Added

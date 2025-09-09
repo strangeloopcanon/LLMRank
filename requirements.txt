@@ -2,7 +2,7 @@ click==8.1.7
 dash==2.18.2
 dash_core_components==2.0.0
 dash_html_components==2.0.0
-llm==0.23
+llm>=0.23
 matplotlib==3.10.1
 networkx==3.4.2
 numpy==2.2.4

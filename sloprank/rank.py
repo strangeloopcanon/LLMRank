@@ -8,6 +8,7 @@ from datetime import datetime
 from typing import Dict, List, Tuple, Optional
 
 from .config import logger, EvalConfig
+from . import __version__
 
 # Try importing visualization libraries
 try:
@@ -437,7 +438,8 @@ def finalize_rankings(
         "rankings": [{"model": m, "score": s} for m, s in ranked_items],
         "metadata": {
             "evaluation_method": config.evaluation_method,
-            "timestamp": datetime.now().isoformat()
+            "timestamp": datetime.now().isoformat(),
+            "version": __version__
         }
     }
     

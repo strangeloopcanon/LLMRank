@@ -22,7 +22,7 @@ You can use it with a large set of heterogeneous prompts to get overall rankings
 5  gemini-exp-1206                      0.154884
 ```
 
-It supports pretty much all models, anything that can be run with the 'llm' library.
+It supports most models that can be run with the `llm` library and parallm. Defaults target the latest flagship models.
 
 ## Features
 - **Peer-Based Evaluation**: Models evaluate each other's responses, mimicking a collaborative and competitive environment.
@@ -70,10 +70,12 @@ pip install .
 
 ### API Keys Setup
 
-Set up API keys using Simon Willison's llm tool. Example:
+Set up API keys using Simon Willison's `llm` tool and install the relevant providers/plugins. Examples:
 ```bash
-llm keys set anthropic 
 llm keys set openai
+llm keys set anthropic
+# If using Gemini providers, set Google/Vertex keys per the chosen provider plugin
+# e.g., `llm keys set google` or configure environment variables as required by the plugin
 ```
 
 Or create a `.env` file with:
@@ -84,7 +86,7 @@ ANTHROPIC_API_KEY=your_anthropic_key
 
 ## Usage
 
-After installing, you can run the entire SlopRank workflow via the `sloprank` command. By default, SlopRank uses the models defined in DEFAULT_CONFIG. You can override this by passing --models with a comma-separated list.
+After installing, you can run the entire SlopRank workflow via the `sloprank` command. By default, SlopRank uses the models defined in DEFAULT_CONFIG (e.g., `gpt-5`, `claude-4-sonnet`, `gemini-2.5-pro`, `deepseek-chat`). You can override this by passing `--models` with a comma-separated list.
 
 ### Basic Usage
 
@@ -94,10 +96,12 @@ sloprank --prompts prompts.csv --output-dir results
 - `--prompts prompts.csv` tells SlopRank where to find your list of prompts.
 - `--output-dir results` puts all CSV and JSON outputs in the results/ folder.
 
-If you want to override the default models:
+If you want to override the default models (example with latest model IDs):
 
 ```bash
-sloprank --prompts prompts.csv --output-dir results --models "chatgpt-4o,o1,claude-3-7-sonnet-latest, deepseek-reasoner, gemini-2.0-pro-exp-02-05" --visualize --confidence
+sloprank --prompts prompts.csv --output-dir results \
+  --models "gpt-5,claude-4-sonnet,gemini-2.5-pro,deepseek-chat" \
+  --visualize --confidence
 ```
 
 ### Configuration
@@ -225,20 +229,17 @@ Special thanks to:
 - The AI community
 ## Using parallm for More Efficient Response Collection
 
-SlopRank uses the `parallm` library for more efficient parallel model querying:
+SlopRank uses the `parallm` library for efficient parallel model querying (built on top of your configured `llm` providers):
 
 ```python
-# Install with pip
-pip install sloprank
-
-# parallm is included as a dependency and automatically used
-sloprank run --prompts prompts.csv --output-dir results --models "gpt-4o,claude-3.5-sonnet-latest"
+# parallm is included as a dependency and automatically used by SlopRank
+sloprank run --prompts prompts.csv --output-dir results --models "gpt-5,claude-4-sonnet"
 
 # Or use parallm directly
 from parallm import query_model_all
 
 # Query multiple models with all prompts in a CSV file
-df = query_model_all("prompts.csv", ["gpt-4", "claude-3-5-sonnet", "gemini-2.0-flash"])
+df = query_model_all("prompts.csv", ["gpt-5", "claude-4-sonnet", "gemini-2.5-pro"])
 print(df)
 ```
 
