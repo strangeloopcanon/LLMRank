@@ -78,9 +78,9 @@ class EvalConfig:
 
 DEFAULT_CONFIG = EvalConfig(
     model_names=[
-        "gemini-2.5-pro-exp-03-25",
-        "claude-3.7-sonnet-latest",
-        "gpt-4o",
+        "gpt-5",
+        "claude-4-sonnet",
+        "gemini-2.5-pro",
         "deepseek-chat"
     ],
     # model_names=[
