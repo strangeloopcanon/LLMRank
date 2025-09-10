@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Dict, List
 
 import click
-import pandas as pd
+from .pandas_backend import pd, is_using_bodo
 
 from .collect import collect_raw_evaluations, collect_responses
 from .config import DEFAULT_CONFIG, EvalConfig, VisualizationConfig, ConfidenceConfig, WebDashboardConfig, logger
@@ -422,6 +422,34 @@ def run(prompts, output_dir, models, responses, visualize, interactive, confiden
         rankings_path = config.output_dir / "rankings.json"
         if rankings_path.exists():
             start_dashboard(config, rankings_path)
+
+
+@cli.command()
+def backend():
+    """Show pandas backend information."""
+    from .pandas_backend import get_backend_info
+    
+    info = get_backend_info()
+    
+    click.echo("SlopRank Pandas Backend Information")
+    click.echo("=" * 40)
+    click.echo(f"Backend: {info['backend']}")
+    click.echo(f"Using Bodo: {info['using_bodo']}")
+    click.echo(f"Module: {info['module']}")
+    
+    if info['env_use_bodo']:
+        click.echo(f"SLOPRANK_USE_BODO: {info['env_use_bodo']}")
+    if info['env_backend']:
+        click.echo(f"SLOPRANK_PANDAS_BACKEND: {info['env_backend']}")
+    
+    click.echo("\nTo switch backends, use:")
+    click.echo("  SLOPRANK_USE_BODO=true   # Force Bodo (default behavior)")
+    click.echo("  SLOPRANK_USE_BODO=false  # Force regular pandas (compatibility mode)")
+    click.echo("  SLOPRANK_PANDAS_BACKEND=bodo    # Force Bodo (default)")
+    click.echo("  SLOPRANK_PANDAS_BACKEND=pandas  # Force regular pandas (compatibility)")
+    click.echo("\nInstallation options:")
+    click.echo("  pip install sloprank          # Standard (includes Bodo)")
+    click.echo("  pip install sloprank[pandas]  # Compatibility mode only")
 
 
 @cli.command()

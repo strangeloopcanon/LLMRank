@@ -2,7 +2,7 @@
 Confidence interval calculation for SlopRank rankings.
 """
 import json
-import pandas as pd
+import bodo.pandas as pd
 import numpy as np
 import networkx as nx
 from pathlib import Path

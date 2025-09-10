@@ -2,7 +2,7 @@ import json
 import random
 import numpy as np
 import networkx as nx
-import pandas as pd
+import bodo.pandas as pd
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Tuple, Optional

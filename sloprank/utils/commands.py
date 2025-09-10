@@ -2,7 +2,7 @@
 Command-line utilities for SlopRank.
 """
 import click
-import pandas as pd
+import bodo.pandas as pd
 import json
 import threading
 import time

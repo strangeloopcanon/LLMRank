@@ -1,5 +1,5 @@
 import json
-import pandas as pd
+import bodo.pandas as pd
 from .config import logger, EvalConfig
 
 def parse_evaluation_rows(raw_eval_df: pd.DataFrame, config: EvalConfig) -> pd.DataFrame:

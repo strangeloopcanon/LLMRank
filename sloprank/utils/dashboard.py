@@ -2,7 +2,7 @@
 Dashboard generation for SlopRank results.
 """
 import json
-import pandas as pd
+import bodo.pandas as pd
 import webbrowser
 import threading
 import time

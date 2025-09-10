@@ -20,7 +20,7 @@ from .config import (
     DEFAULT_CONFIG
 )
 
-__version__ = "0.3.11"
+__version__ = "0.3.15"
 __all__ = [
     "EvalConfig",
     "VisualizationConfig",

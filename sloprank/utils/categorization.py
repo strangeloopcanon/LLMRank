@@ -2,7 +2,7 @@
 Prompt categorization and category-based analysis.
 """
 import json
-import pandas as pd
+import bodo.pandas as pd
 import re
 from pathlib import Path
 from collections import defaultdict
